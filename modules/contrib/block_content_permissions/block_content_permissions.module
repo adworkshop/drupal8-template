@@ -1,0 +1,72 @@
+<?php
+
+/**
+ * @file
+ * Block content permissions module.
+ */
+
+use Drupal\Core\Access\AccessResult;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Session\AccountInterface;
+use Drupal\views\ViewExecutable;
+
+/**
+ * Implements hook_ENTITY_TYPE_access().
+ */
+function block_content_permissions_block_content_access(EntityInterface $entity, $operation, AccountInterface $account) {
+  // Disallow operation access to entity based on user's permissions.
+  switch ($operation) {
+    case 'delete':
+    case 'update':
+      // Get block content type.
+      $bundle_type = $entity->bundle();
+      // Check permissions for block content.
+      // Negate to hide operation link.
+      return AccessResult::forbiddenIf(!(
+        $account->hasPermission('administer block content') &&
+        $account->hasPermission("$operation any $bundle_type block content")
+        ));
+  }
+}
+
+/**
+ * Implements hook_views_pre_execute().
+ */
+function block_content_permissions_views_pre_execute(ViewExecutable $view) {
+  // If user cannot "view restricted block content", restrict block_content
+  // view page to block content the user can create, edit or delete.
+  if ($view->id() == 'block_content') {
+    $account = $view->getUser();
+
+    // Check if user cannot view restricted block content.
+    if (!$account->hasPermission('view restricted block content')) {
+      // Get block content types.
+      $allowedBlockContentTypes = \Drupal::entityQuery('block_content_type')->execute();
+
+      // Remove block content types based on user's permissions.
+      foreach ($allowedBlockContentTypes as $type) {
+        $edit = "update any $type block content";
+        $delete = "delete any $type block content";
+        $create = "create $type block content";
+        if (!($account->hasPermission($edit) || $account->hasPermission($delete) || $account->hasPermission($create))) {
+          unset($allowedBlockContentTypes[$type]);
+        }
+      }
+
+      // Restrict query to allowed block content types.
+      if (!empty($allowedBlockContentTypes)) {
+        $view->build_info['query']->condition('type', $allowedBlockContentTypes, 'IN');
+      }
+      else {
+        $view->build_info['query']->condition('type', '', '=');
+      }
+
+      // Restrict exposed "type" field options to allowed block content types.
+      foreach ($view->exposed_widgets['type']['#options'] as $key => $value) {
+        if ($key != 'All' && !in_array($key, $allowedBlockContentTypes)) {
+          unset($view->exposed_widgets['type']['#options'][$key]);
+        }
+      }
+    }
+  }
+}

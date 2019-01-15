@@ -1,0 +1,6 @@
+name: Adworkshop Miscellaneous
+description: Perform common tasks.
+package: Custom
+
+type: module
+core: 8.x

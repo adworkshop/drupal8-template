@@ -1,0 +1,6 @@
+{
+    "name": "drupal/ADWMISC",
+    "description": "Performs common tasks for Adworkshop sites.",
+    "type": "drupal-module",
+    "license": "GPL-2.0+"
+}

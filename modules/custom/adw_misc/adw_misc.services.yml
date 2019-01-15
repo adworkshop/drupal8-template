@@ -1,0 +1,37 @@
+services:
+  adw_misc.route_subscriber:
+    class: Drupal\adw_misc\Routing\RouteSubscriber
+    tags:
+      - { name: event_subscriber }
+  adw_misc.twig.TwigScaleAndTranslateIterator:
+    class: Drupal\adw_misc\TwigScaleAndTranslateIterator
+    tags:
+      - { name: twig.extension }
+  adw_misc.twig.TwigRemoveComments:
+    class: Drupal\adw_misc\TwigRemoveComments
+    tags:
+      - { name: twig.extension }
+  adw_misc.twig.TwigGetFieldsStyledRenderArray:
+    class: Drupal\adw_misc\TwigGetFieldsStyledRenderArray
+    tags:
+      - { name: twig.extension }
+  adw_misc.twig.TwigGetNextUpcomingDate:
+    class: Drupal\adw_misc\TwigGetNextUpcomingDate
+    tags:
+      - { name: twig.extension }
+  adw_misc.twig.TwigShowNextUpcomingTime:
+    class: Drupal\adw_misc\TwigShowNextUpcomingTime
+    tags:
+      - { name: twig.extension }
+  adw_misc.twig.TwigRemoveWidthAndHeight:
+    class: Drupal\adw_misc\TwigRemoveWidthAndHeight
+    tags:
+      - { name: twig.extension }
+  adw_misc.twig.TwigGetFieldsStyledUrl:
+    class: Drupal\adw_misc\TwigGetFieldsStyledUrl
+    tags:
+      - { name: twig.extension }
+  adw_misc.twig.TwigStripTags:
+    class: Drupal\adw_misc\TwigStripTags
+    tags:
+      - { name: twig.extension }

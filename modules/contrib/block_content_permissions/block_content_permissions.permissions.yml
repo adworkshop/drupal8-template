@@ -1,0 +1,14 @@
+administer block content:
+  title: 'Administer block content'
+  description: 'Perform create, edit, and delete tasks across all block content types.'
+  restrict access: true
+administer block content types:
+  title: 'Administer block content types'
+  description: 'Maintain the types of block content available.'
+  restrict access: true
+view restricted block content:
+  title: 'View restricted block content'
+  description: 'View restricted block content that the user cannot manage on the <em>Custom block library</em> page.'
+
+permission_callbacks:
+  - Drupal\block_content_permissions\Permissions::get

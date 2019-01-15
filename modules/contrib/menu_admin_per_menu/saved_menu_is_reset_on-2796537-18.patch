@@ -1,0 +1,235 @@
+diff --git a/menu_admin_per_menu.module b/menu_admin_per_menu.module
+index f92ddaa..26cde89 100644
+--- a/menu_admin_per_menu.module
++++ b/menu_admin_per_menu.module
+@@ -21,7 +21,8 @@ function menu_admin_per_menu_form_alter(&$form, FormStateInterface $form_state,
+     || $form_object instanceof MenuLinkContentForm) {
+     $account = \Drupal::currentUser();
+     if (!$account->hasPermission('administer menu')) {
+-      menu_admin_per_menu_filter_parent_options($form['menu_parent']['#options']);
++      $options = $form['menu_parent']['#options'];
++      $form['menu_parent']['#options'] = menu_admin_per_menu_filter_parent_options($account, $options);
+     }
+   }
+   if ($form_object instanceof MenuForm) {
+@@ -40,54 +41,49 @@ function menu_admin_per_menu_form_alter(&$form, FormStateInterface $form_state,
+ function menu_admin_per_menu_form_node_form_alter(&$form, FormStateInterface $form_state) {
+   $account = \Drupal::currentUser();
+   if (!$account->hasPermission('administer menu')) {
+-    $menu_options = &$form['menu']['link']['menu_parent']['#options'];
+-    $menu_exist = menu_admin_per_menu_filter_parent_options($menu_options);
+-    if ($menu_exist){
+-      $form['menu']['link']['menu_parent']['#default_value'] = reset($menu_options);
+-    }
+-    else {
++    /** @var \Drupal\menu_admin_per_menu\MenuAdminPerMenuAccessInterface $allowedMenusService */
++    $allowedMenusService = \Drupal::service('menu_admin_per_menu.allowed_menus');
++    $allowed_menus = $allowedMenusService->getPerMenuPermissions($account);
++
++    $default_value = &$form['menu']['link']['menu_parent']['#default_value'];
++    list($current_menu, ) = explode(':', $default_value, 2);
++    // Disallow editing the menu item if there is a pre-existing menu item
++    // belonging to a menu the user does not have permission to access.
++    if (!empty($current_menu) && !in_array($current_menu, $allowed_menus)) {
+       $form['menu']['#access'] = FALSE;
++      return;
+     }
+-  }
+-}
+ 
+-/**
+- * Deletes not allowed menu items from select element for current user.
+- *
+- * @param array &$element
+- *   Reference to form select element with menu items.
+- *
+- * @return bool
+- *   FALSE if there is no allowed menu items,
+- *   TRUE if we have some allowed menu items.
+- */
+-function menu_admin_per_menu_filter_parent_options(&$element) {
+-  $allowed_menus = menu_admin_per_menu_get_allowed_menus();
+-  if (count($allowed_menus) && is_array($element)) {
+-    $option_keys = array_keys($element);
+-    foreach ($option_keys as $option_key) {
+-      list($menu, $item) = explode(':', $option_key);
+-      $permission = 'administer ' . $menu . ' menu items';
+-      if (!isset($allowed_menus[$permission])) {
+-        unset($element[$option_key]);
+-      }
+-    }
+-    return count($element);
++    $options = &$form['menu']['link']['menu_parent']['#options'];
++    $options = menu_admin_per_menu_filter_parent_options($account, $options ? $options : []);
++    $form['menu']['#access'] = count($options) > 0;
+   }
+-  return FALSE;
+ }
+ 
+ /**
+- * Returns an array of the allowed menus for current user.
++ * Removes menu items for menus a user does not have permission to access.
++ *
++ * @param \Drupal\Core\Session\AccountInterface
++ *   The user to check for access.
++ * @param array $options
++ *   An array of menu item labels keyed by menu item ID.
+  *
+  * @return array
+- *   An array with the menus machine-readable names as values.
++ *   Filtered menu item labels keyed by menu item ID.
+  */
+-function menu_admin_per_menu_get_allowed_menus() {
+-  $account = \Drupal::currentUser();
++function menu_admin_per_menu_filter_parent_options(AccountInterface $account, array $options) {
++  /** @var \Drupal\menu_admin_per_menu\MenuAdminPerMenuAccessInterface $allowedMenusService */
+   $allowedMenusService = \Drupal::service('menu_admin_per_menu.allowed_menus');
+   $allowed_menus = $allowedMenusService->getPerMenuPermissions($account);
+-  return $allowed_menus;
++
++  foreach ($options as $key => $option) {
++    list($menu, ) = explode(':', $key, 2);
++    if (!in_array($menu, $allowed_menus)) {
++      unset($options[$key]);
++    }
++  }
++
++  return $options;
+ }
+ 
+ /**
+diff --git a/src/Access/MenuAdminPerMenuAccess.php b/src/Access/MenuAdminPerMenuAccess.php
+index 281c2ea..242cce2 100644
+--- a/src/Access/MenuAdminPerMenuAccess.php
++++ b/src/Access/MenuAdminPerMenuAccess.php
+@@ -25,7 +25,7 @@ class MenuAdminPerMenuAccess implements MenuAdminPerMenuAccessInterface {
+       foreach ($menus as $name => $title) {
+         $permission = 'administer ' . $name . ' menu items';
+         if ($account->hasPermission($permission)) {
+-          $perms_menu[$permission] = $permission;
++          $perms_menu[$permission] = $name;
+         }
+       }
+       \Drupal::moduleHandler()->alter('menu_admin_per_menu_get_permissions', $perms_menu, $account);
+diff --git a/src/Tests/MenuAdminPerMenuNodeSave.php b/src/Tests/MenuAdminPerMenuNodeSave.php
+new file mode 100644
+index 0000000..5786ec3
+--- /dev/null
++++ b/src/Tests/MenuAdminPerMenuNodeSave.php
+@@ -0,0 +1,116 @@
++<?php
++
++namespace Drupal\menu_admin_per_menu\Tests;
++
++use Drupal\Tests\BrowserTestBase;
++
++/**
++ * Tests the interaction of the node system with menu links.
++ *
++ * @group node
++ */
++class MenuAdminPerMenuNodeSave extends BrowserTestBase {
++
++  /**
++   * Modules to enable.
++   *
++   * @var array
++   */
++  public static $modules = ['menu_ui', 'node', 'block', 'menu_admin_per_menu'];
++
++  /**
++   * A user with permission to create nodes but not administer menu.
++   *
++   * @var \Drupal\user\UserInterface
++   */
++  protected $contentOnlyUser;
++
++  /**
++   * A user with permission to create nodes and administer menu.
++   *
++   * @var \Drupal\user\UserInterface
++   */
++  protected $contentAndMenuUser;
++
++  /**
++   * A user with permission to access content only.
++   *
++   * @var \Drupal\user\UserInterface
++   */
++  protected $anonymousUser;
++
++  /**
++   * {@inheritdoc}
++   */
++  protected function setUp() {
++    parent::setUp();
++
++    // Create Basic page node types.
++    if ($this->profile != 'standard') {
++      $this->drupalCreateContentType([
++        'type' => 'page',
++        'name' => 'Basic page',
++        'display_submitted' => FALSE,
++      ]);
++    }
++
++    $this->drupalPlaceBlock('system_menu_block:main');
++
++    $this->contentOnlyUser = $this->drupalCreateUser([
++      'access content',
++      'administer content types',
++    ]);
++    $this->contentAndMenuUser = $this->drupalCreateUser([
++      'access content',
++      'administer content types',
++      'administer main menu items',
++    ]);
++    $this->anonymousUser = $this->drupalCreateUser([
++      'access content',
++    ]);
++  }
++
++  /**
++   * Test menu re-save by users without permission.
++   *
++   * Tests that a menu still exists and remains existing if a user without the
++   * menu permissions resaves a node.
++   */
++  public function testResaveMenuLinkWithoutAccess() {
++    $menu_link_title = $this->randomString();
++
++    // Save the node with the menu.
++    $this->drupalLogin($this->contentAndMenuUser);
++    $edit = [
++      'title[0][value]' => $this->randomString(),
++      'body[0][value]' => $this->randomString(),
++      'menu[enabled]' => 1,
++      'menu[title]' => $menu_link_title,
++    ];
++    $this->drupalPostForm('node/add/page', $edit, t('Save'));
++
++    // Ensure the menu is in place.
++    $this->assertLink($menu_link_title);
++
++    // Logout.
++    $this->drupalLogout();
++
++    // Save the node again as someone without permission.
++    $this->drupalLogin($this->contentOnlyUser);
++    $edit = [
++      'title[0][value]' => $this->randomString(),
++      'body[0][value]' => $this->randomString(),
++    ];
++    $this->drupalPostForm('node/add/page', $edit, t('Save'));
++
++    // Ensure the menu is still in place.
++    $this->assertLink($menu_link_title);
++
++    // Ensure anonymous users with "access content" permission can see this
++    // menu.
++    $this->drupalLogout();
++    $this->drupalGet('');
++    $this->assertLink($menu_link_title);
++  }
++
++}

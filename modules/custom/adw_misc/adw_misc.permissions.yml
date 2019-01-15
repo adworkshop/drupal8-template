@@ -1,0 +1,3 @@
+view custom block page:
+  title: 'View Custom Block Page'
+  description: 'View custom block page at /admin/structure/block/block-content'

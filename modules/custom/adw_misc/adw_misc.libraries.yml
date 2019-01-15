@@ -1,0 +1,5 @@
+fontawesome:
+  version: 1.x
+  css:
+    theme:
+      adw-font-awesome/css/font-awesome.css: {}

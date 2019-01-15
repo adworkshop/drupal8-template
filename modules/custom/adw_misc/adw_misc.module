@@ -1,0 +1,157 @@
+<?php
+
+	// this is to get the form id
+	/*function adw_misc_form_alter(array &$form, $form_state){
+		kint($form['form_id']['#value']);
+		//drupal_set_message($form['form_id']['#value']);
+		//print $form['form_id']['#value'];
+	}*/
+
+    /**
+     * Implements hook_form_FORM_ID_alter().
+     * Hides subtitle field from listings in the "normal listings" field on pages
+     */
+    function adw_misc_form_node_page_edit_form_alter(&$form, $form_state, $form_id){
+        if(isset($form['field_listings']['widget'])){
+            for($i=0;$i<100;$i++){
+                if(isset($form['field_listings']['widget'][$i])){
+                    $form['field_listings']['widget'][$i]['subform']['field_subtitle']['#type'] = 'hidden';
+                }
+                else{
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
+     * Implements hook_form_FORM_ID_alter().
+     * Hides subtitle field from listings in the "normal listings" field on Homepage
+     */
+    function adw_misc_form_node_home_page_edit_form_alter(&$form, $form_state, $form_id){
+        if(isset($form['field_listings_paragraphs']['widget'])){
+            for($i=0;$i<100;$i++){
+                if(isset($form['field_listings_paragraphs']['widget'][$i])){
+                    $form['field_listings_paragraphs']['widget'][$i]['subform']['field_subtitle']['#type'] = 'hidden';
+                }
+                else{
+                    break;
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Implements hook_token_info().
+     */
+    function adw_misc_token_info(){
+
+      $types['adw'] = array(
+        'name' => t('Adworkshop Tokens'),
+        'description' => t('Tokens provided by Adworkshop.'),
+      );
+
+      $tokens['menu-link-or-title'] = array(
+        'name' => t('Menu Link or Title'),
+        'description' => t('Returns the Menu Link Name if set, otherwise returns title.'),
+      );
+
+      $tokens['menu-link-parent-alias-path'] = array(
+        'name' => t('Menu Link Parent\'s alias\' path'),
+        'description' => t('Returns the Menu Link Parent\'s alias\'s path. Drupal only provides whole url as token.'),
+      );
+
+      $tokens['listing-type-search-page-path'] = array(
+        'name' => t('Listing Type Search Page Path'),
+        'description' => t('Returns the alias of the search page for this type of listing.'),
+      );
+
+      return array(
+        'types' => $types,
+        'tokens' => array(
+          'adw' => $tokens,
+        ),
+      );
+
+    }
+
+    /**
+     * Implements hook_tokens().
+     */
+    function adw_misc_tokens($type, $tokens, array $data = array(), array $options = array()) {
+
+      $replacements = array();
+      if ($type == 'adw') {
+        // loop over tokens drupal gave us to look at
+        foreach ($tokens as $name => $original){
+          // if this is the token we made
+          if($name == 'menu-link-or-title'){
+            // try to load menu link for this node
+            $nid = $data['node']->id();
+            $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+            $menuLink = $menu_link_manager->loadLinksByRoute('entity.node.canonical', array('node' => $nid));
+            // if this node has a menu link
+            if(count($menuLink)){
+              $replacements[$original] = $menuLink[array_keys($menuLink)[0]]->getTitle();
+            }
+            // if this node does not have a menu link
+            else{
+              $replacements[$original] = $data['node']->getTitle();
+            }
+          }
+          elseif($name == 'menu-link-parent-alias-path'){
+            // try to load menu link for this node
+            $nid = $data['node']->id();
+            $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+            $menuLink = $menu_link_manager->loadLinksByRoute('entity.node.canonical', array('node' => $nid));
+            // if this node has a menu link find it's parent
+            if(count($menuLink)){
+              // if the menu link has a parent get it's alias
+              if($menuLink[array_keys($menuLink)[0]]->getParent() != ''){
+                $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+                $parentMenuLink = $menu_link_manager->createInstance($menuLink[array_keys($menuLink)[0]]->getParent());
+                $replacements[$original] = $parentMenuLink->getUrlObject()->toString();
+              }
+              //if the menu link does not have a parent return null
+              else{
+                $replacements[$original] = '';
+              }
+            }
+            // if this node does not have a menu link return null
+            else{
+              $replacements[$original] = '';
+            }
+          }
+          elseif($name == 'listing-type-search-page-path'){
+              if(
+                  method_exists($data['node']->get('field_listintype')->first(),'getValue')
+                  && is_numeric($data['node']->get('field_listintype')->first()->getValue()['target_id'])
+              ){
+                $listingTypeTid = $data['node']->get('field_listintype')->first()->getValue()['target_id'];
+                // Get the nid of the page that's outputting the search for this type of listing
+                $query = \Drupal::entityQuery('node');
+                $query->condition('status', 1);
+                $query->condition('type', 'page');
+                $query->condition('field_listing_search', $listingTypeTid);
+                $nids = $query->execute();
+                // If there's a search page for this type of listing
+                if(count($nids)){
+                    $replacements[$original] = \Drupal::service('path.alias_manager')->getAliasByPath('/node/'.$nids[array_keys($nids)[0]]);
+                }
+                // If there's no search page return null
+                else{
+                    $replacements[$original] = urlencode(strtolower(\Drupal\taxonomy\Entity\Term::load($listingTypeTid)->getName()));
+                }
+              }
+
+          }
+
+        }
+
+      }
+
+      return $replacements;
+    }
+
+?>

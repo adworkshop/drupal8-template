@@ -1,0 +1,2 @@
+permission_callbacks:
+  - Drupal\metatag_fine_grained_perms\MetatagPermissions::permissions

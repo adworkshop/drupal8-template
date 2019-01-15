@@ -1,0 +1,11 @@
+name: Twig function image_style_uri
+description: Provides a image_style_uri function for twig
+package: Twig
+type: module
+# core: 8.0
+
+# Information added by Drupal.org packaging script on 2017-04-05
+version: '8.x-1.x-dev'
+core: '8.x'
+project: 'image_style_uri'
+datestamp: 1491406384

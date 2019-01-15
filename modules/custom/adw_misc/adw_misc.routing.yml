@@ -1,0 +1,7 @@
+adw_misc.edit_blocks_page:
+  path: '/admin/structure/block/edit-blocks'
+  defaults:
+    _controller: '\Drupal\adw_misc\Controller\EditBlocksController::editBlocksPage'
+    _title: 'Edit Blocks'
+  requirements:
+    _permission: 'view custom block page'
