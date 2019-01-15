@@ -11,7 +11,7 @@ dependencies:
     - path
     - text
 _core:
-  default_config_hash: pYMGibDIOkLz1S36INFG7RRygJ5FN8tTnm5-5UIe9YE
+  default_config_hash: LLxYXZcZ4QCPuFF4MUDzvdngoUrwR7vrAv-tp3JY7qY
 id: node.crop_responsive_example.default
 targetEntityType: node
 bundle: crop_responsive_example
@@ -25,16 +25,20 @@ content:
       summary_rows: 3
       placeholder: ''
     third_party_settings: {  }
+    region: content
   created:
     type: datetime_timestamp
     weight: 5
     settings: {  }
     third_party_settings: {  }
+    region: content
   field_image_crop_simple:
     weight: 1
     settings:
       show_default_crop: true
       warn_multiple_usages: true
+      crop_types_required:
+        - crop_16_9
       preview_image_style: thumbnail
       crop_preview_image_style: crop_thumbnail
       crop_list:
@@ -45,28 +49,34 @@ content:
       show_crop_area: false
     third_party_settings: {  }
     type: image_widget_crop
+    region: content
   langcode:
     type: language_select
     weight: 2
-    settings: {  }
+    settings:
+      include_locked: true
     third_party_settings: {  }
+    region: content
   path:
     type: path
     weight: 8
     settings: {  }
     third_party_settings: {  }
+    region: content
   promote:
     type: boolean_checkbox
     settings:
       display_label: true
     weight: 6
     third_party_settings: {  }
+    region: content
   sticky:
     type: boolean_checkbox
     settings:
       display_label: true
     weight: 7
     third_party_settings: {  }
+    region: content
   title:
     type: string_textfield
     weight: 0
@@ -74,6 +84,7 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
   uid:
     type: entity_reference_autocomplete
     weight: 4
@@ -82,4 +93,5 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
 hidden: {  }
