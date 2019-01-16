@@ -1,0 +1,15 @@
+// File Name: _vendor-overrides.scss
+// Description: Browser resets and normalizers
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+
+//owl carousel overrides
+.owl-stage{line-height: 0;}
+
+//drupal
+
+#block-local-tasks ul{
+	margin: 0;
+}

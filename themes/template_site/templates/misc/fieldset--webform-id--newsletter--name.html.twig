@@ -1,0 +1,12 @@
+<fieldset{{ attributes.addClass(classes) }}>
+
+    {% if errors %}
+      <div>
+        {{ errors }}
+      </div>
+    {% endif %}
+
+
+    {{ children }}
+
+</fieldset>

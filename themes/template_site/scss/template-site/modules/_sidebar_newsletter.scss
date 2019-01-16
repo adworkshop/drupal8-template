@@ -1,0 +1,116 @@
+// File Name: _sidebar_newsletter.scss
+// Description: internal, sidebar newsletter application
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+.sidebar_newsletter {
+
+	padding-top: 0;
+	padding-bottom: 0;
+
+	@media(min-width: 1100px){
+		padding: 0;
+	}
+
+	.sidebar_newsletter__container {
+		position: relative;
+		padding: 2rem;
+		margin-bottom: 2rem;
+		border: none;
+		vertical-align: top;
+		color: $color__primary;
+		background-color: $color__primary;
+	}
+
+	.sidebar_newsletter__header{
+		margin-top: 0;
+		font-size: 1.25rem;
+		font-weight: 600;
+	}
+
+	.sidebar_newsletter__title {
+    color: white;
+    text-transform: none;
+    font-weight: normal;
+    font-family: "Libre Baskerville", serif;
+		font-size: 2rem;
+		margin-top: 0;
+		margin-bottom: 0;
+	}
+
+	.sidebar_newsletter__form{
+		font-size: 1rem;
+		margin-top: 1rem;
+	}
+
+	.sidebar_newsletter__form input {
+		padding: 15px 25px;
+		margin: 0;
+		text-shadow: none;
+		border: none;
+	}
+
+	.sidebar_newsletter__body {
+		color: $color__primary--xxx_light;
+		margin-top: 1rem;
+	}
+
+	.sidebar_newsletter__submit {
+		display: inline-block; 
+    width: auto;
+		background-color: transparent;
+	}
+
+	.contextual-region{
+		position: static;
+	}
+}
+
+
+//Newsletter form
+
+.sidebar_newsletter{
+
+	&__submit{
+		
+	}
+
+	&__form{}
+
+	.form-item label, .views-exposed-widget label {
+    color: white;
+	}
+	.sidebar_newsletter__form input[type="submit"] {
+		background: white;
+		padding: 1.25rem 2.75rem;
+    background-color: white;
+		color: $color__secondary;
+		font-size: 1.125rem;
+		font-weight: 700;
+
+		@include hover {
+			background-color: $color__secondary;
+			color: white;
+		}
+	}
+
+	.webform-submission-newsletter-node-3-form.webform-submission-form.js-webform-details-toggle.webform-details-toggle.sidebar__newsletter_form#webform-submission-newsletter-node-3-form{}
+	#edit-name--wrapper.fieldgroup.form-composite.js-webform-name.webform-name.js-form-item.form-item.js-form-wrapper.form-wrapper{}
+	.visually-hidden.fieldset-legend{}
+	.fieldset-wrapper{}
+	#edit-name--wrapper.fieldgroup .form-composite.js-webform-name.webform-name.js-form-wrapper.form-wrapper{} 
+	.js-form-item.form-item.js-form-type-textfield.form-item-name-first.js-form-item-name-first{}
+	#edit-name-first.form-text{}
+	.js-form-item.form-item.js-form-type-email.form-item-email.js-form-item-email{}
+	#edit-email.form-email{}
+	.form-actions.js-form-wrapper.form-wrapper#edit-actions{}
+	.sidebar__newsletter_submit{}
+	.webform-button--submit.button.button--primary.js-form-submit.form-submit{}
+}
+
+
+.sidebar_newsletter__submit {}
+.sidebar_newsletter__submit .form-submit {
+
+}

@@ -1,0 +1,81 @@
+div.status-message{
+    margin-top: 20px;
+    padding: 15px;
+    color: #0074bd;
+    border: 1px solid #bfbfbf;
+    background-color: rgba(242,242,240,0.7);
+}
+
+/* Map */
+#map_canvas{
+    height:500px;
+    width:100%;
+}
+
+/* Tabs */
+
+.intro_promo{
+    position: relative;
+}
+
+#block-local-tasks{
+    position: absolute;
+    bottom: 0px;
+    z-index: 500;
+}
+
+.copy.copy--internal #block-local-tasks{
+    position: relative;
+}
+
+.copy.copy--internal #block-local-tasks li{
+    padding: 0px;
+}
+
+#block-local-tasks ul li{
+    position: relative;
+    width: auto;
+    top: 0;
+    margin: 0px;
+    z-index: 2;
+    color: #0074bd;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    margin-top: 15px;
+}
+
+#block-local-tasks ul li a{
+    height: auto;
+    width: auto;
+    margin: 0 0 -1px;
+    text-align: center;
+    display: block;
+    padding: 7px 2em 7px 2em;
+    color: #0074bd;
+    border: 1px solid #bfbfbf;
+    background-color: rgba(242,242,240,0.7);
+}
+
+#block-local-tasks ul li a.is-active{
+    border-bottom: none;
+    background-color: #fff;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-radius-topleft: 4px;
+    -moz-border-radius-topright: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+#block-local-tasks ul li a:hover {
+    background-color: #fafaf7;
+}
+
+.hideMenu{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    z-index: 99999;
+    color: #fff !important;
+}

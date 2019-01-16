@@ -1,0 +1,58 @@
+<div class="footer__column footer__column--left ">
+
+    {#-------#}
+    {# Image #}
+    {#-------#}
+    {{ content.field_footer_image }}
+
+    {#------------------------#}
+    {# Contact Info Container #}
+    {#------------------------#}
+    {%
+        if
+            remove_comments(content.field_address|render)|trim is not empty
+            or remove_comments(content.field_phone_number|render)|trim is not empty
+            or remove_comments(content.field_email|render)|trim is not empty
+    %}
+        <div class="footer__freeform">
+            {# Address #}
+            {{ content.field_address }}
+            {# Phone Number #}
+            {{ content.field_phone_number }}
+            {# Email Address #}
+            {{ content.field_email }}
+        </div>
+    {% endif %}
+
+    {#--------------#}
+    {# Social Links #}
+    {#--------------#}
+    {%
+        if
+            remove_comments(content.field_facebook|render)|trim is not empty
+            or remove_comments(content.field_second_facebook_link|render)|trim is not empty
+            or remove_comments(content.field_twitter_link|render)|trim is not empty
+            or remove_comments(content.field_instagram_link|render)|trim is not empty
+            or remove_comments(content.field_youtube_link|render)|trim is not empty
+    %}
+        <div class="social__container">
+
+            {# facebook #}
+            {{ content.field_facebook }}
+
+            {# second facebook #}
+            {{ content.field_second_facebook_link }}
+
+            {# twitter #}
+            {{ content.field_twitter_link }}
+
+            {# instagram #}
+            {{ content.field_instagram_link }}
+
+            {# youtube #}
+            {{ content.field_youtube_link }}
+
+        </div>
+    {% endif %}
+
+</div>

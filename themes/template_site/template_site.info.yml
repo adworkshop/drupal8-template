@@ -1,0 +1,36 @@
+name: Template Site theme by Adworkshop
+description: A custom Drupal 8 theme developed by Adworkshop.
+type: theme
+core: 8.x
+
+libraries:
+  - template_site/libs-js
+  - template_site/custom-js
+
+# Define regions
+regions:
+  header: 'Header'
+  over_content: 'Over Content'
+  content: 'Main content'
+  below_content: 'Below Content'
+  sidebar_nav: 'Sidebar Nav'
+  sidebar: 'Sidebar'
+  footer: 'Footer'
+  footer-nav: 'Footer Nav'
+  book_now: 'Book Now'
+  no_show: 'No Show Region'
+
+libraries-override:
+  core/modernizr:
+    js:
+      assets/vendor/modernizr/modernizr.min.js: js/libs/modernizr-2.8.3.min.js
+  toolbar/toolbar:
+    js:
+      js/views/BodyVisualView.js: js/overrides/BodyVisualView.js
+  core/jquery:
+    js:
+      assets/vendor/jquery/jquery.min.js: js/libs/jquery-1.8.3.min.js
+
+ckeditor_stylesheets:
+  - css/custom/editor.css
+  - plugins/font-awesome-v4.7.0/css/font-awesome.min.css

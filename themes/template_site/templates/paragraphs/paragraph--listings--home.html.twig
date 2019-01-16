@@ -1,0 +1,48 @@
+<div class="featured_listing">
+    <div class="featured_listing__container global_width">
+
+        <div class="listing__copy copy">
+            <div class="copy__container">
+                <div class="copy__header">
+                    {#-----------#}
+                    {# Sub Title #}
+                    {#-----------#}
+                    {{ content.field_subtitle }}
+                    
+                    {#-------#}
+                    {# Title #}
+                    {#-------#}
+                    {{ content.field_title }}
+                </div>
+
+                <div class="copy__body">
+                    {#------#}
+                    {# Body #}
+                    {#------#}
+                    {{ content.field_body }}
+
+                    {#----------------#} 
+                    {# Formatted Info #}
+                    {#----------------#}
+                    {{ content.field_information }}
+
+                    {#------#}
+                    {# Link #}
+                    {#------#}
+                    {{ content.field_block_link }}
+                </div>
+            </div>
+
+        </div><!--END .featured_listing__content-->
+
+        {#-------#}
+        {# Image #}
+        {#-------#}
+        {% if remove_comments(content.field_image|render)|trim is not empty %}
+            <div class="featured_listing__img_wrapper">
+                <img src="{{ remove_comments(content.field_image|render)|trim }}" class="featured_listing__img" />
+            </div>
+        {% endif %}
+
+    </div><!--END .featured_listing__container-->
+</div><!--END .featured_listing-->

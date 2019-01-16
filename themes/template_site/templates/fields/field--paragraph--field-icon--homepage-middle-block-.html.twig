@@ -1,0 +1,5 @@
+<div class="panel__icon">
+{% for item in items %}
+<img class="panel__icon--img" src="/themes/template_site/assets/i/icons/{{ remove_comments(item.content) }}">
+{% endfor %}
+</div>

@@ -1,0 +1,123 @@
+// File Name: _mixins.scss
+// Description: Sass mixins
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+$gw_full--960px : 5vw;
+$gw_full--1100px : 7vw;
+
+@mixin global_width($half:false, $sidebar:false) {
+
+	@media screen {
+		padding-left: 7vw;
+		padding-right: 7vw;
+	}
+
+	@media (min-width: 800px) {
+	
+	}
+
+	@if $half == null and $sidebar == false { //if it's a normal global width
+
+		@media (min-width: 960px) {
+			margin-left: $gw_full--960px;
+			margin-right: $gw_full--960px;
+			padding: 0;
+			width: 90%;
+		}
+
+		@media (min-width: 1100px) {
+			width: 90%;
+			max-width: 1440px;
+			margin-left: auto;
+			margin-right: auto;
+		}
+	
+		@media (min-width: 1300px) {
+			width: 86%;
+			max-width: 1440px;
+			margin-left: $gw_full--1100px;
+			margin-right: $gw_full--1100px;
+		}
+
+	} @else if $half == true { //if it's a half width element
+	
+		@media (min-width: 960px) {
+			padding-left: $gw_full--960px;
+			padding-right: $gw_full--960px;
+			width: 100%;
+		}
+
+		@media (min-width: 1100px) {
+			max-width: 1440px;
+			padding-left: $gw_full--1100px;
+			padding-right: $gw_full--1100px;
+		}
+	
+		@media (min-width: 1300px) {
+			width: 100%;
+			max-width: 1440px;
+			margin-left: 0;
+			margin-right: 0;
+		}
+	} @else if $sidebar == true { //if it's an internal sidebar element
+
+		@media (min-width: 960px) {
+			padding: 4rem;
+			margin: 0;
+			width: 100%;
+		}
+	
+		@media (min-width: 1100px) {
+			width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+			padding: 2rem;
+		}
+	}
+}
+
+@mixin global_width__cancel($min: 0px, $max: 10000000px) {
+
+	@media(min-width: $min) and (max-width: $max) {
+		width: auto;
+		margin-left: 0;
+		margin-right: 0;
+		padding-left: 0;
+		padding-right: 0;
+	}
+}
+
+
+//GLOBAL WIDTH MIXINS
+
+$global--min_0: 7vw;
+$global--min_800: 12.5vw;
+$global--min_1100: 15vw;
+
+
+//gradients
+
+@mixin grade_bg__white_to_transp--left_to_right { 
+	/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ffffff+0,ffffff+100&1+0,0+100 */
+	background: -moz-linear-gradient(left, rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(left, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to right, rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
+}
+
+@mixin drop_shadow--light {
+	-webkit-box-shadow: 0 0 4px 0 rgba(0,0,0,.4);
+	box-shadow: 0 0 4px 0 rgba(0,0,0, .4);
+}
+
+//no-touch hover
+
+@mixin hover {
+  .no-touch & {
+    &:hover {
+      @content;
+    }
+  }
+}

@@ -1,0 +1,15 @@
+ {{ attach_library('template_site/custom-css') }}
+ {{ attach_library('template_site/owl-slider') }}
+ {{ attach_library('template_site/enquire') }}
+ {{ attach_library('template_site/internal') }}
+ {{ attach_library('template_site/fareharbor-cal') }}
+ {{ attach_library('template_site/match-height') }}
+
+    {{ page.header }}
+
+    {{ page.content }}
+
+    <div class="footer">
+    {{ page.footer }}
+    {{ page['footer-nav'] }}
+    </div>

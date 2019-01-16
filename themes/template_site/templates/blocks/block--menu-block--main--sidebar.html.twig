@@ -1,0 +1,10 @@
+{% if remove_comments(content|render)|trim is not empty %}
+    {% set heading_id = attributes.id ~ '-menu'|clean_id %}
+    <div class="sidebar_nav">
+      <div class = "sidebar_nav__container">
+              {% block content %}
+                {{ content }}
+              {% endblock %}
+      </div>
+    </div>
+{% endif %}

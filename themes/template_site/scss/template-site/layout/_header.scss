@@ -1,0 +1,268 @@
+// File Name: _header.scss
+// Description: General global header navigation styles
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+
+/* GENERAL -- BEGIN -------------------------------- */
+.navigation{
+	position: relative;
+	width: 100%;
+	background-color: rgba(white,0.8); 
+	z-index: 4;
+	@include drop_shadow--light;
+
+	&:after{
+		position: absolute;
+		width: 100%;
+		height: 100%; 
+		right: 0;
+		bottom: 10px;
+		border-bottom: 1px solid white;
+		padding-bottom: 10px;
+	}
+
+	@media(min-width: 960px) {
+		//position: absolute;
+		//top: 0;
+	}
+}
+
+.mobileBtnWrapper {
+	top: 28px;
+	z-index: 2;
+	right: 7vw;
+
+	a {
+		&:link{
+			color: $color__primary;
+		}
+	}
+}
+
+#menu {
+	color: white;
+}
+
+nav#mainMenu {
+	z-index: 2;
+	bottom: 0;
+	margin: 0;
+	padding-top: 0;
+	right: 7vw;
+
+	@media(min-width: 1000px){
+		padding-top: 35px;
+	}
+}
+
+.navInnerContainer{
+	font-size: 0;
+	line-height: 0;
+	position: relative;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+
+	@include global_width();
+}
+
+.logo-container{
+	position: relative;
+	width: 100%;
+	font-size: 0;
+	z-index: 1;
+}
+
+.logo-container_inner{
+	display: inline-block;
+	width: auto;
+
+	@media(min-width: 800px){
+
+	}
+	
+	img{
+		width: 100px;
+		height: auto;
+	}
+}
+
+ul.adwMenu li:first-child > a {}
+
+nav#mainMenu > ul.adwMenu {
+
+	margin: 0 auto;
+	padding: 2rem 0;
+
+	@media(min-width: 960px) {
+		width: auto;
+		padding: 0;
+	}
+}
+
+.navigation ul.adwMenu li:first-of-type > a {
+	border-top: none;
+}
+
+.navigation ul.adwMenu li:last-of-type > a {
+	border-bottom: none;
+}
+
+ul.adwMenu ul{margin-top: 0;}
+ul.adwMenu li{margin-left: 0;}
+
+/*TIER 1*/
+
+//dropdown tabs (arrow/plus) - dropdown closed
+					.navigation ul.adwMenu > li .openChild{ background: transparent; color: $color__secondary; height: 99%;} /*dropdown tab - dropdown closed*/
+.no-touch .navigation ul.adwMenu > li .openChild:hover{ background: transparent; color: $color__secondary--dark;} /*dropdown tab - dropdown closed - hover*/
+
+//dropdown tabs (arrow/plus) - dropdown open
+					.navigation ul.adwMenu > li.over > .openChild{ background: transparent;}/*dropdown tab - dropdown open*/
+.no-touch .navigation ul.adwMenu > li.over > .openChild:hover{ background: transparent;} /*dropdown tab - dropdown open - hover*/
+					.navigation ul.adwMenu > li.over > .openChild .openChildInner:before{ color: $color__secondary--dark;}
+
+//nav element
+					.navigation ul.adwMenu > li > a { background: white; color: $color__primary; padding-left: 5%; font-size: 1rem; font-weight: 800;  border-top-color: $color__grey--xx_light; padding-left: 0;}/*nav element*/
+					.navigation ul.adwMenu > li > a {text-transform: uppercase;}
+.no-touch .navigation ul.adwMenu > li > a:hover{color: $color__primary--dark;}/*nav element - hover*/
+
+
+/*TIER 2*/
+
+//dropdown tabs (arrow/plus) - dropdown closed
+					.navigation ul.adwMenu li ul li .openChild { background: #f2f2f2; height: 99%; color: $color__secondary;}/*dropdown tab - dropdown closed*/
+					.navigation ul.adwMenu li ul li .openChild { color: $color__primary;} /*dropdown tab - dropdown closed - hover*/
+.no-touch .navigation ul.adwMenu li ul li .openChild:hover {color: $color__primary--light;}
+
+//dropdown tabs (arrow/plus) - dropdown open
+					.navigation ul.adwMenu li ul li.over > .openChild { background: transparent; color: $color__secondary--x_dark;}/*dropdown tab - dropdown open*/
+.no-touch .navigation ul.adwMenu li ul li.over > .openChild:hover { color: $color__primary--light;} /*dropdown tab - dropdown open - hover*/
+					.navigation ul.adwMenu li ul li.over > .openChild { color: $color__primary;}
+
+//nav element
+					.navigation ul.adwMenu > li > ul > li > a { padding-left: 1rem; background: $color__grey--xx_light; color: $color__primary--dark; position: relative; z-index: 1;}/*nav element*/
+.no-touch .navigation ul.adwMenu > li > ul > li a:hover { background: $color__grey--x_light; color: $color__primary--dark;}/*nav element - hover*/
+					.navigation ul.adwMenu > li > ul li a:before { color: $color__primary--light;}
+					.navigation ul.adwMenu li .openChild { z-index: 2; background-color: transparent;}
+
+.navigation nav#mainMenu ul.adwMenu > li > ul {
+	@media(min-width: 960px) {
+		border: 1px solid #eeeeee;
+	}
+}
+
+/*TIER 3*/
+
+//dropdown tabs (arrow/plus) - dropdown closed
+					.navigation ul.adwMenu > li > ul > li > ul > li.over > .openChild{background: purple; color: purple;}/*dropdown tab - dropdown open*/
+					.navigation ul.adwMenu > li > ul > li > ul > li > .openChild{background: blue; height: 99%;}/*dropdown tab - dropdown closed*/
+
+//dropdown tabs (arrow/plus) - dropdown open
+.no-touch .navigation ul.adwMenu > li > ul > li > ul > li > .openChild:hover{background: red; color: red;} /*dropdown tab - dropdown closed - hover*/
+.no-touch .navigation ul.adwMenu > li > ul > li > ul > li.over > .openChild:hover{background: red; color: #111d3b;} /*dropdown tab - dropdown open - hover*/
+
+//nav element
+					.navigation ul.adwMenu > li > ul > li > ul > li a{position: relative; z-index: 2; padding-left: 2rem; background: #dbdbdb; color: $color__primary;}/*nav element*/
+.no-touch .navigation ul.adwMenu > li > ul > li > ul > li a:hover{ background: #d1d1d1; color: $color__primary--dark;}/*nav element - hover*/
+
+h3{line-height: 1.3em;}
+p{line-height: 1.5em;}
+
+/* GENERAL -- END ---------------------------------- */
+
+@media(min-width: 960px) {
+	
+	nav#mainMenu{padding-top: 0; bottom: 0;}
+	nav#mainMenu ul.adwMenu > li > ul > li a { border-top: 1px solid white;}
+	nav#mainMenu ul.adwMenu > li > ul { background: transparent;}
+	nav#mainMenu ul.adwMenu > li > ul { border-right: 0; border-left: 0; border-bottom: 0; right: 0;}
+	nav#mainMenu ul.adwMenu > li > ul > li a{ border-bottom: none;}
+	
+	nav#mainMenu ul.adwMenu li.tierMenu > a:after {
+    //content: "";
+    background-color: $color__primary--xxxx_light;
+    width: 100%;
+    height: 3px;
+    display: block;
+    margin-top: .2rem;
+	}
+
+	.main--internal{margin-top: 100px;}
+		
+	/*TIER 1*/
+
+	//dropdown tabs (arrow/plus) - dropdown closed
+						.navigation ul.adwMenu > li > .openChild{ background: transparent; color: $color__secondary;} /*dropdown tab - dropdown closed*/
+	.no-touch .navigation ul.adwMenu > li > .openChild:hover{ background: transparent; color: $color__secondary--dark;} /*dropdown tab - dropdown closed - hover*/
+
+	//dropdown tabs (arrow/plus) - dropdown open
+						.navigation ul.adwMenu > li.over > .openChild { background: transparent;  height: 100%;}/*dropdown tab - dropdown open*/
+						.navigation	ul.adwMenu > li.over > .openChild > .openChildInner:before { color: $color__secondary--dark;}/*dropdown tab icon - dropdown open*/
+	.no-touch .navigation ul.adwMenu > li.over > .openChild:hover > .openChildInner:before { background: transparent; color:$color__secondary;} /*dropdown tab - dropdown open - hover*/
+
+	//nav element
+	.no-touch .navigation ul.adwMenu > li > a:hover { color: $color__primary--dark;}/*nav element - hover*/
+						.navigation ul.adwMenu > li > a { background: transparent; color: $color__primary; font-size: 1.1rem; letter-spacing: 1px;}/*nav element*/
+						.navigation nav#mainMenu ul.adwMenu > li.tierMenu.empty > a { padding-right: 0;}
+						.navigation nav#mainMenu ul.adwMenu > li.tierMenu > a {  margin-right: 0; padding-right: 40px; margin-left: 30px;}
+
+	/*TIER 2*/
+
+	//dropdown tabs (arrow/plus) - dropdown closed
+	.no-touch .navigation ul.adwMenu > li > ul > li .openChild:hover > .openChildInner:before { background: transparent; color: $color__primary--dark;} /*dropdown tab - dropdown closed*/
+						.navigation ul.adwMenu > li > ul > li .openChild { background: transparent; color: $color__primary;}/*dropdown tab - dropdown closed*/
+						.navigation	ul.adwMenu > li > ul > li .openChild > .openChildInner:before { color: $color__primary;}/*dropdown tab icon - dropdown closed*/
+
+	//dropdown tabs (arrow/plus) - dropdown open
+						.navigation ul.adwMenu > li > ul > li.over > .openChild { background: transparent; color: #8b8b8b;}/*dropdown tab - dropdown open*/
+						.navigation	ul.adwMenu > li > ul > li.over > .openChild > .openChildInner:before { color: $color__secondary;}/*dropdown tab icon - dropdown open*/
+	.no-touch .navigation ul.adwMenu > li > ul > li.over > .openChild:hover > .openChildInner:before { color: $color__secondary--dark;} /*dropdown tab - dropdown open - hover*/
+
+	//nav element
+						.navigation ul.adwMenu > li > ul > li a { padding-left: 1rem; background: white; color: $color__primary--dark; font-weight: $font-weight__medium; font-size: 1rem;}/*nav element*/
+	.no-touch .navigation ul.adwMenu > li > ul > li a:hover { background: $color__grey--xxx_light; color: $color__primary--x_dark;}/*nav element - hover*/
+	
+
+	/*TIER 3*/
+
+	//dropdown tabs (arrow/plus) - dropdown closed
+						.navigation ul.adwMenu > li > ul > li > ul > li > .openChild{background: blue;}/*dropdown tab - dropdown closed*/
+	.no-touch .navigation ul.adwMenu > li > ul > li > ul > li > .openChild:hover{background: red; color: red;} /*dropdown tab - dropdown closed - hover*/
+
+	//dropdown tabs (arrow/plus) - dropdown open
+						.navigation ul.adwMenu > li > ul > li > ul > li.over > .openChild{background: purple; color: purple;}/*dropdown tab - dropdown open*/
+						.navigation ul.adwMenu > li > ul > li > ul > li.over > .openChild{background: purple; color: purple;}/*dropdown tab - dropdown open*/
+	.no-touch .navigation ul.adwMenu > li > ul > li > ul > li.over > .openChild:hover{background: red; color: $color__primary;} /*dropdown tab - dropdown open - hover*/
+
+	//nav element
+						.navigation ul.adwMenu > li > ul > li > ul > li a { position: relative; z-index: 3; padding-left: 2rem; background: $color__grey--xx_light; color: $color__primary;}/*nav element*/
+	.no-touch .navigation ul.adwMenu > li > ul > li > ul > li a:hover { background: $color__grey--x_light;}/*nav element - hover*/
+
+	.logo-container_inner img{width: 100px; height: auto;}
+
+}
+	
+	@media(min-width: 1000px){
+		nav#mainMenu{z-index: 2; margin: 0; padding-top: 0;}
+	}
+	
+
+	//internal
+
+	// .not-front {
+	// 	.navigation {
+	// 		position: relative;
+	// 	}
+
+	// 	.logo-container {
+	// 		background-color: $color__primary--light;
+	// 	}
+
+	// 	@media(min-width: 960px){
+	// 		//nav element
+	// 		& .navigation ul.adwMenu li a{background: transparent; color: white;}/*nav element*/
+	// 		& .navigation ul.adwMenu li > a:hover{color: $color__grey--xx_light;}/*nav element - hover*/
+	// 	}
+	// }

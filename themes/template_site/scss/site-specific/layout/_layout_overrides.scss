@@ -1,0 +1,121 @@
+// File Name: _layout_overrides.scss
+// Description:
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+
+// File Name: _layout_overrides.scss
+// Description:
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+
+
+
+/*TIER 1*/
+
+//dropdown tabs (arrow/plus) - dropdown closed
+.navigation ul.adwMenu > li .openChild{ } /*dropdown tab - dropdown closed*/
+.no-touch .navigation ul.adwMenu > li .openChild:hover{ } /*dropdown tab - dropdown closed - hover*/
+
+//dropdown tabs (arrow/plus) - dropdown open
+					.navigation ul.adwMenu > li.over > .openChild{ }/*dropdown tab - dropdown open*/
+.no-touch .navigation ul.adwMenu > li.over > .openChild:hover{ } /*dropdown tab - dropdown open - hover*/
+					.navigation ul.adwMenu > li.over > .openChild .openChildInner:before{ }
+
+//nav element
+					.navigation ul.adwMenu > li > a { }/*nav element*/
+					.navigation ul.adwMenu > li > a { }
+.no-touch .navigation ul.adwMenu > li > a:hover{ }/*nav element - hover*/
+
+
+/*TIER 2*/
+
+//dropdown tabs (arrow/plus) - dropdown closed
+					.navigation ul.adwMenu li ul li .openChild { }/*dropdown tab - dropdown closed*/
+					.navigation ul.adwMenu li ul li .openChild { } /*dropdown tab - dropdown closed - hover*/
+.no-touch .navigation ul.adwMenu li ul li .openChild:hover { }
+
+//dropdown tabs (arrow/plus) - dropdown open
+					.navigation ul.adwMenu li ul li.over > .openChild { }/*dropdown tab - dropdown open*/
+.no-touch .navigation ul.adwMenu li ul li.over > .openChild:hover { } /*dropdown tab - dropdown open - hover*/
+					.navigation ul.adwMenu li ul li.over > .openChild { }
+
+//nav element
+					.navigation ul.adwMenu > li > ul > li > a { }/*nav element*/
+.no-touch .navigation ul.adwMenu > li > ul > li a:hover { }/*nav element - hover*/
+					.navigation ul.adwMenu > li > ul li a:before { }
+					.navigation ul.adwMenu li .openChild { }
+
+
+/*TIER 3*/
+
+//dropdown tabs (arrow/plus) - dropdown closed
+					.navigation ul.adwMenu > li > ul > li > ul > li.over > .openChild{ }/*dropdown tab - dropdown open*/
+					.navigation ul.adwMenu > li > ul > li > ul > li > .openChild{ }/*dropdown tab - dropdown closed*/
+
+//dropdown tabs (arrow/plus) - dropdown open
+.no-touch .navigation ul.adwMenu > li > ul > li > ul > li > .openChild:hover{ } /*dropdown tab - dropdown closed - hover*/
+.no-touch .navigation ul.adwMenu > li > ul > li > ul > li.over > .openChild:hover{ } /*dropdown tab - dropdown open - hover*/
+
+//nav element
+					.navigation ul.adwMenu > li > ul > li > ul > li a{ }/*nav element*/
+.no-touch .navigation ul.adwMenu > li > ul > li > ul > li a:hover{ }/*nav element - hover*/
+
+
+/* GENERAL -- END ---------------------------------- */
+
+@media(min-width: 960px) {
+	
+	/*TIER 1*/
+
+	//dropdown tabs (arrow/plus) - dropdown closed
+						.navigation ul.adwMenu > li > .openChild{ } /*dropdown tab - dropdown closed*/
+	.no-touch .navigation ul.adwMenu > li > .openChild:hover{ } /*dropdown tab - dropdown closed - hover*/
+
+	//dropdown tabs (arrow/plus) - dropdown open
+						.navigation ul.adwMenu > li.over > .openChild { }/*dropdown tab - dropdown open*/
+						.navigation	ul.adwMenu > li.over > .openChild > .openChildInner:before { }/*dropdown tab icon - dropdown open*/
+	.no-touch .navigation ul.adwMenu > li.over > .openChild:hover > .openChildInner:before { } /*dropdown tab - dropdown open - hover*/
+
+	//nav element
+	.no-touch .navigation ul.adwMenu > li > a:hover { }/*nav element - hover*/
+						.navigation ul.adwMenu > li > a {}/*nav element*/
+						.navigation nav#mainMenu ul.adwMenu > li.tierMenu.empty > a { }
+						.navigation nav#mainMenu ul.adwMenu > li.tierMenu > a { }
+
+	/*TIER 2*/
+
+	//dropdown tabs (arrow/plus) - dropdown closed
+	.no-touch .navigation ul.adwMenu > li > ul > li .openChild:hover > .openChildInner:before { } /*dropdown tab - dropdown closed*/
+						.navigation ul.adwMenu > li > ul > li .openChild { }/*dropdown tab - dropdown closed*/
+						.navigation	ul.adwMenu > li > ul > li .openChild > .openChildInner:before { }/*dropdown tab icon - dropdown closed*/
+
+	//dropdown tabs (arrow/plus) - dropdown open
+						.navigation ul.adwMenu > li > ul > li.over > .openChild { }/*dropdown tab - dropdown open*/
+						.navigation	ul.adwMenu > li > ul > li.over > .openChild > .openChildInner:before { }/*dropdown tab icon - dropdown open*/
+	.no-touch .navigation ul.adwMenu > li > ul > li.over > .openChild:hover > .openChildInner:before { } /*dropdown tab - dropdown open - hover*/
+
+	//nav element
+						.navigation ul.adwMenu > li > ul > li a { }/*nav element*/
+	.no-touch .navigation ul.adwMenu > li > ul > li a:hover { }/*nav element - hover*/
+	
+
+	/*TIER 3*/
+
+	//dropdown tabs (arrow/plus) - dropdown closed
+						.navigation ul.adwMenu > li > ul > li > ul > li > .openChild{ }/*dropdown tab - dropdown closed*/
+	.no-touch .navigation ul.adwMenu > li > ul > li > ul > li > .openChild:hover{ } /*dropdown tab - dropdown closed - hover*/
+
+	//dropdown tabs (arrow/plus) - dropdown open
+						.navigation ul.adwMenu > li > ul > li > ul > li.over > .openChild{ }/*dropdown tab - dropdown open*/
+						.navigation ul.adwMenu > li > ul > li > ul > li.over > .openChild{ }/*dropdown tab - dropdown open*/
+	.no-touch .navigation ul.adwMenu > li > ul > li > ul > li.over > .openChild:hover{ } /*dropdown tab - dropdown open - hover*/
+
+	//nav element
+						.navigation ul.adwMenu > li > ul > li > ul > li a { }/*nav element*/
+	.no-touch .navigation ul.adwMenu > li > ul > li > ul > li a:hover { }/*nav element - hover*/
+
+}

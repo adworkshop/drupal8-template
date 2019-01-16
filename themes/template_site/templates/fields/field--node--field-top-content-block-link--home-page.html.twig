@@ -1,0 +1,6 @@
+{% for item in items %}
+<a class="mission__cta" href="{{ item.content['#url'] }}">
+    <p class="mission__cta_copy">{{ item.content['#title'] }}</p>
+    <img class="mission__cta_icon" src="/themes/template_site/assets/i/icons/polarCaves0554-icons-_cta_arrow.svg">
+</a>
+{% endfor %}

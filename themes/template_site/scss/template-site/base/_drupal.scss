@@ -1,0 +1,51 @@
+// File Name: _drupal.scss
+// Description: Add elements, which apply to typography including font-size, line-height, color, etc.
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+
+html {
+	box-sizing: border-box;
+	padding: .5rem;
+}
+
+ol, ul {
+	padding-left: 1.1rem;
+	color: $color__grey--dark;
+}
+
+ol {
+	list-style-type: decimal;
+}
+
+ul {
+	list-style-type: circle;
+}
+
+a {
+	color: $color__secondary;
+	text-decoration: underline;
+}
+
+li {
+	margin-top: .25rem;
+}
+
+figcaption {
+	margin-top: 1rem;
+	padding-bottom: 1rem;
+	font-size: 1rem;
+	line-height: 1.75em;
+	color: $color__grey--dark;
+	font-style: italic;
+	border-bottom: 1px solid #f2f2f2;
+}
+
+img {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}

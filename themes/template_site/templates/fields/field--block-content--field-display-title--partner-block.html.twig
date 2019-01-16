@@ -1,0 +1,13 @@
+{% for item in items %}
+    <div class="slider slider__intro">
+        <img class="slider__intro_chevron--top" src="/themes/template_site/assets/i/edges/polarCaves0544_edges_up_diagonal_flip.png">
+        <img class="slider__intro_chevron--right" src="/themes/template_site/assets/i/edges/polarCaves0544_edges_right_chevron.png">
+        <div class="slider__vertical_align--outer">
+            <div class="slider__vertical_align--inner wow fadeIn fadeInLeft animated">
+                <h3 class="slider__title">
+                {{ item.content }}
+                </h3>
+            </div><!--"END .slider__vertical_align--inner"-->
+        </div><!--"END .slider__vertical_align--outer"-->
+    </div><!--"END .attractions"-->
+{% endfor %}

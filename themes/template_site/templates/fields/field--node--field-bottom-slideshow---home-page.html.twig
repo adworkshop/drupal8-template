@@ -1,0 +1,28 @@
+<div class="slideshow__container">
+<div class="slideshow__gradient"></div>
+<div class="slideshow__slider owl-carousel owl-theme">
+{% for item in items %}
+
+    {% if loop.index == 1 %}
+        {% set firstClass = ' first' %}
+    {% else %}
+        {% set firstClass = '' %}
+    {% endif %}
+
+    <div class="slide{{ firstClass }} slide--{{ loop.index }}">
+        <img class="slide__img"
+            src="{{ get_fields_styled_url(item.content,'600w') }}"
+            data-small-src="{{ get_fields_styled_url(item.content,'600w') }}"
+            data-medium-src="{{ get_fields_styled_url(item.content,'960w') }}"
+            data-large-src="{{ get_fields_styled_url(item.content,'1800w') }}"
+        />
+    </div>
+{% endfor %}
+</div> <!-- /#featured-slider.royalSlider.rsDefault -->
+<div class="slideshow__nav">
+<div class="slideshow__nav_bullets owl-dots">
+</div>
+<div class="slideshow__nav_buttons owl-nav">
+</div>
+</div>
+</div>

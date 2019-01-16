@@ -1,0 +1,38 @@
+// File Name: _breadcrumbs.scss
+// Description: General global breadcrumbs
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+.breadcrumbs{
+	background-color: whitesmoke;
+
+	.global_width {
+		@include global_width();
+	}
+
+	.breadcrumb {
+		
+		display: inline-block;
+		padding: 15px 25px 15px 0;
+		margin:  0;
+
+		@include hover {
+			color: black;
+		}
+
+		&__copy {
+			display: inline-block;
+			margin-right: 10px;
+		}
+
+		&:after{
+			content:"\f054";
+			display: inline-block;
+			font-family: FontAwesome;
+			font-size: .8em;
+		}
+	}
+}
+
+

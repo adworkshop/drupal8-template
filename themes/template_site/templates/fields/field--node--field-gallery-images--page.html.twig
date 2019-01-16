@@ -1,0 +1,9 @@
+<div class="gallery gallery__internal--tiled owl-carousel owl-carousel--internal">
+{% for item in items %}
+    <div class="gallery__tile">
+        <a class="fancybox" rel="gallery1" href="{{ get_fields_styled_url(item.content,'1800w') }}" title="{{ item.content['#item'].title }}">
+        {{ item }}
+        </a>
+    </div>
+{% endfor %}
+</div>

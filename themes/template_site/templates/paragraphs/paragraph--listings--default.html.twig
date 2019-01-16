@@ -1,0 +1,19 @@
+<div class="listing">
+
+    <div class = "listing__container"> 
+        {% if remove_comments(content.field_image|render)|trim|raw is not empty %}
+            <div class="listing__image">
+                <img class="listing__img" src="{{ remove_comments(content.field_image|render)|trim|raw }}">
+            </div>
+
+        {% else %}
+            {% set extraContentClass = ' noLeftPadding' %}
+        {% endif %}
+
+        <div class="listing__copy{{ extraContentClass }}">
+        {{ content.field_title }}
+        {{ content.field_body }}
+        </div>
+    </div>
+
+</div>

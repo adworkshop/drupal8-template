@@ -1,0 +1,32 @@
+<div class="mission" name="mission">
+    <div class="mission__container">
+
+        {{ content.field_image }}
+        
+        <div class="copy">
+            <div class="copy__container">
+                {% if
+                    remove_comments(content.field_text_box_background|render)|trim is not empty
+                    or remove_comments(content.field_title|render)|trim is not empty
+                %}
+                    <div class="copy__header  wow fadeIn animated">
+                        {# Background Image #}
+                        {{ content.field_text_box_background }}
+                        {# Sub title #}
+                        {{ content.field_subtitle }}
+                        {# Title #}
+                        {{ content.field_title }}
+                    </div>
+                {% endif %}
+
+                <div class="copy__body  wow fadeIn animated">
+                    {# Body #}
+                    {{ content.field_body }}
+                    {# Link #}
+                    {{ content.field_block_link }}
+                </div>
+
+            </div><!--END .copy__container-->
+        </div><!--END .copy-->
+    </div>
+</div><!--END .mission-->

@@ -1,0 +1,22 @@
+{{ attach_library('template_site/owl-slider') }}
+{{ attach_library('template_site/fancybox') }}
+{{ attach_library('template_site/enquire') }}
+{{ attach_library('template_site/custom-css') }}
+{{ attach_library('template_site/homepage') }}
+{{ attach_library('template_site/homepage-libraries') }}
+{{ attach_library('template_site/match-height') }}
+
+<div class="wrapper">
+			<div class = "anchor_btn">
+				<a class = "anchor_btn__link">
+					<i class="fa fa-chevron-circle-down" aria-hidden="true"></i>	
+				</a>
+			</div>
+      {{ page.header }}
+			<div class="main main--home">
+      	{{ page.content }}
+			</div>
+
+    {{ page.footer }}
+</div>
+

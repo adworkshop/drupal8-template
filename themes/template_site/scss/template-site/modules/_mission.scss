@@ -1,0 +1,177 @@
+// File Name: _mission.scss
+// Description: homepage mission, including image and copy
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+
+.mission {
+
+	margin-bottom: 0;
+	position: relative;
+
+	.mission__container{
+
+		width: 100%;
+
+		@media(min-width: 960px){
+			display: table;
+			height: 100%;
+			vertical-align: middle;
+		}
+
+		h2 {
+			color: white;
+		}
+
+		h3 {
+			color: white;
+		}
+
+		p{
+			color: $color__primary--xxxx_light;
+		}
+
+	}
+}
+
+//headers
+.mission {
+
+	& .copy__header {
+
+		h2 {
+			margin-top: 0;
+			margin-bottom: .5em;
+		}
+
+		h3 {
+			display: inline-block;
+			border-bottom-width: 2px;
+		}
+
+	}
+
+	.copy__upper_sub {
+		margin-bottom: 3rem;
+		border-bottom: 2px solid $color__primary--xxx_light;
+	}
+}
+
+.mission {
+
+	.copy{
+
+		display: inline-block;
+		background-color: $color__primary;
+
+		&:after {
+			content: "";
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			top: 0;
+			left: 0;
+			opacity: .6;
+		
+			background-image: $bg__light;
+			background-position: center;
+			background-size: auto 30%;
+		}
+
+		@media(min-width: 800px){
+			position: relative;
+			border-top: 20px solid white;
+			border-top: none;
+			top: 0;
+			left: 0;
+			height: auto;
+		}
+	}
+
+	.copy__container{
+
+		position: relative;
+		z-index: 2;
+		@include global_width($half: true);
+		padding-top: 3rem;
+
+		@media(min-width: 800px){
+		
+		}
+
+		@media(min-width: 960px){
+			padding-top: 5vw;
+			padding-bottom: 5vw;
+		}
+
+		@media(min-width: 1100px){
+			padding-top: 7vw;
+			padding-bottom: 7vw;
+		}
+	}
+
+	.mission_image{
+		
+		font-size: 0;
+		
+		@media(min-width: 800px){
+		}
+	}
+
+	&__image{
+		display: inline-block;
+		width: 100%;
+		margin-top: 0;
+
+		@media(min-width: 800px){
+			position: absolute;
+			height: 100%;
+			width: 50%;
+			left: 0;
+			top: 0;
+			background-size: cover;
+		}
+	}
+
+	&__background{
+		display: none;
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: -1;
+		opacity: .1;
+		height: 100%;
+		width: 100%;
+		background-size: cover;
+		background-position: center;
+	}
+
+	.copy,
+	.mission_image {
+
+		@media(min-width: 960px){
+			display: table-cell;
+			width: 50%;
+		}
+	}
+
+	.button{
+
+		margin-top: 2.5rem;
+		
+		@include drop_shadow--light;
+		@include button--bg_white;
+		@include button--border_none;
+
+		.button__link {
+
+			color: $color__secondary;
+
+			@include hover {
+				color: white;
+				background-color: $color__secondary;
+			}
+		}
+	}
+}

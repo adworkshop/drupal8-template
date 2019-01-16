@@ -1,0 +1,49 @@
+ {{ attach_library('template_site/custom-css') }}
+ {{ attach_library('template_site/owl-slider') }}
+ {{ attach_library('template_site/fancybox') }}
+ {{ attach_library('template_site/enquire') }}
+ {{ attach_library('template_site/internal') }}
+ {{ attach_library('template_site/fareharbor-cal') }}
+ {{ attach_library('template_site/match-height') }}
+
+
+    {{ page.header }}
+
+    <div class="main main--internal">
+
+    <!-- PAGE HEADING ------------------------------------>
+    <div class="page_heading">
+        <div class="page_heading__container global_width">
+            <div class="page_heading__header">
+                <h1>{{ page['#title'] }}</h1>
+            </div>
+        </div>
+    </div>
+    <!-- END PAGE HEADING -------------------------------->
+
+
+    <div class="content_and_sidebar">
+    <div class = "content_and_sidebar__container">
+    <div class="body_section">
+
+    <div class="copy copy--internal{{ extraContentClass }}">
+    <div class="copy__container">
+    {{ page['main-content']['template_site_local_tasks'] }}
+    {{ page.content }}
+    </div>
+    </div>
+
+    </div>
+    </div>
+    </div>
+    </div><!--END .main-->
+
+{#----------#}
+{# BOOK NOW #}
+{#----------#}
+{{ book_now }}
+
+    <div class="footer">
+    {{ page.footer }}
+    {{ page['footer-nav'] }}
+    </div>

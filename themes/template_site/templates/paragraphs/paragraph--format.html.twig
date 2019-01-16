@@ -1,0 +1,11 @@
+{%
+    if(
+        remove_comments(content.field_info|render)|trim is not empty
+        or remove_comments(content.field_info_value|render)|trim is not empty
+    )
+%}
+    <li>
+        {{ content.field_info }}
+        {{ content.field_info_value }}
+    </li>
+{% endif %}

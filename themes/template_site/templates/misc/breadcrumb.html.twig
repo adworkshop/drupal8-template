@@ -1,0 +1,15 @@
+{% if breadcrumb %}
+
+    {% for item in breadcrumb %}
+
+        {% if item.url %}
+          <a class="breadcrumb" href="{{ item.url }}">
+                <div class="breadcrumb__copy">{{ item.text }}</div>
+           </a>
+        {% else %}
+          <div class="breadcrumb__copy">{{ item.text }}</div>
+        {% endif %}
+
+    {% endfor %}
+
+{% endif %}

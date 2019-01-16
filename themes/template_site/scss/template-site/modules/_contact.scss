@@ -1,0 +1,19 @@
+// File Name: _contact.scss
+// Description: internal, sidebar newsletter application
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+.captcha {
+	margin-top: 2rem;
+
+	.g-recaptcha {
+		margin-top: 1rem;
+	}
+
+	summary {
+		margin-top: 1rem;
+		margin-bottom: 1rem;
+	}
+}
+

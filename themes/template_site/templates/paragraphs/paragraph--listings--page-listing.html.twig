@@ -1,0 +1,48 @@
+{%
+    if(
+        remove_comments(content.field_image|render)|trim is not empty
+        or remove_comments(content.field_title|render)|trim is not empty
+        or remove_comments(content.field_body|render)|trim is not empty
+        or remove_comments(content.field_information|render)|trim is not empty
+        or remove_comments(content.field_block_link|render)|trim is not empty
+    )
+%}
+    <div class="listing">
+        <div class="listing__container">
+            {#-------#}
+            {# Image #}
+            {#-------#}
+            {{ content.field_image }}
+
+            <div class="listing__copy">
+                {#-------#}
+                {# Title #}
+                {#-------#}
+                <div class="listing__header">
+                {{ content.field_title }}
+                </div>
+
+                {#------#}
+                {# Body #}
+                {#------#}
+                <div class="listing__body">
+                {{ content.field_body }}
+
+                {#----------------#}
+                {# Formatted Info #}
+                {#----------------#}
+                {% if remove_comments(content.field_information|render)|trim is not empty %}
+                    <ul class = "listing__info listing__info--internal">
+                        {{ content.field_information }}
+                    </ul>
+                {% endif %}
+
+                {#------#}
+                {# Link #}
+                {#------#}
+                {{ content.field_block_link }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}

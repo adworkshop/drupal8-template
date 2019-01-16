@@ -1,0 +1,246 @@
+// File Name: _load_first.scss
+// Description: Include general styles, as well as any necessary pseudo selectors (e.g. :hover, :active, :focus, etc.)
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+input[type="submit"] {
+	background: #4f4f4f; color: white;
+	-webkit-transition: all .25s ease-in-out;
+	-moz-transition: all .25s ease-in-out;
+	-ms-transition: all .25s ease-in-out;
+	-o-transition: all .25s ease-in-out;
+	transition: all .25s ease-in-out;
+}
+
+input[type="submit"] {
+	position: relative;
+	margin-top: 0;
+	font-size: 1rem;
+	line-height: 1em;
+	display: inline-block;
+	z-index: 1;
+	padding: 1.125rem 2.5rem;
+	font-weight: $font-weight__bold;
+	color: white;
+	transition: $all--x_slow;
+	text-decoration: none;
+	background-color: $color__secondary;
+	text-shadow: none;
+	border: none;
+	@include drop_shadow--light;
+
+	@include hover {
+		color: white;
+		background-color: $color__secondary--dark;
+	}
+}
+
+input[type="submit"] {
+	@include hover {
+		background: #666666; color: white;
+	}
+}
+
+// Button
+
+.button {
+	
+	position: relative;
+	display: inline-block;
+	overflow: hidden;
+	margin-top: 1.5rem;
+	margin-right: 1rem;
+	text-transform: uppercase;
+	text-align: center;
+	font-family: $font-family__primary;
+
+	span{
+		position: relative;
+		z-index: 1;
+	}
+
+	//default
+	& &__link {
+		position: relative;
+		font-size: 1rem;
+		line-height: 1em;
+		display: inline-block;
+		z-index: 1;
+		padding: 1.125rem 2.5rem;
+		font-weight: $font-weight__bold;
+		color: white;
+		transition: $all--x_slow;
+		text-decoration: none;
+		background-color: $color__secondary--dark;
+
+		@include hover {
+			color: white;
+			background-color: $color__secondary;
+		}
+
+		@media(min-width: 800px) {
+			font-size: 1.125rem;
+			padding: 1.25rem 2.75rem;
+		}
+
+		@media(min-width: 960px) {
+			
+		}
+
+	}
+}
+
+
+//background color variations
+@mixin button--bg_primary{
+
+	&__link {
+
+		background-color: $color__primary;
+		color: white;
+
+		@include hover {
+			background-color: $color__primary--light;
+			color: $color__primary--xx_light;
+		}
+	}
+}
+
+@mixin button--bg_secondary{
+
+	&__link {
+
+		background-color: $color__secondary;
+
+		@include hover {
+			background-color: $color__secondary--light;
+		}
+	}
+}
+
+@mixin button--bg_secondary--transparent{
+
+	&__link {
+
+		background-color: rgba($color__secondary, .8);
+
+		@include hover {
+			background-color: rgba($color__secondary--light, .7);
+		}
+	}
+}
+
+@mixin button--bg_white{
+		&__link {
+		color: $color__primary;
+		background-color: $color__white;
+		@include hover {
+			background-color: $color__white;
+		}
+	}
+	
+	&--bg_transparent &__link {
+	}
+}
+
+@mixin button--bg_transparent{
+
+	&__link {
+		background-color: transparent;
+		color: $color__primary;
+		@include hover {
+			color: white;
+			background-color: $color__primary;
+		}
+	}
+
+}
+	
+
+		//border color variations
+
+@mixin button--border_primary {
+
+	&__link {
+		border: 2px solid $color__primary;
+		@include hover {
+			color: white;
+		}
+	}
+}
+
+@mixin button--border_secondary {
+	&__link {
+		border: 2px solid $color__secondary;
+
+		@include hover {
+			color: white;
+		}
+	}
+}
+
+@mixin button--border_tertiary {
+
+		&--border_tertiary &__link {
+			border: 2px solid $color__tertiary;
+		}
+
+		&--border_white &__link {
+	
+			border: 2px solid white;
+	
+			@include hover {
+				color: $color__primary;
+			}
+		}
+	}
+
+	@mixin button--border_white {
+
+		&__link {
+			border: 2px solid $color__white;
+			@include hover {
+				color: white;
+			}
+		}
+	}
+
+	@mixin button--border_none{
+		&--border_none &__link {
+			border: none;
+		}
+	}
+	
+	@mixin button--drop_shadow {
+		box-shadow: 0 0 5px hsla(0, 0%, 0%, .5);
+	}
+
+
+	.anchor_btn {
+
+		position: fixed;
+		display: none;
+		padding-bottom: 1rem;
+		z-index: 4;
+
+		@media(min-width: 960px) {
+			display: none; //display: inline-block;
+			bottom: 0;
+			right: 5%;
+		}
+
+		.anchor_btn__link {
+
+			padding: 1rem 1rem 3rem 1rem;
+			background-color: rgba(255,255,255,.9);
+			border-radius: 10000000px 10000000px 0 0;
+			font-size: 2.25rem;
+			cursor: pointer;
+
+		}
+
+		i {
+			color: $color__secondary;
+		}
+	}

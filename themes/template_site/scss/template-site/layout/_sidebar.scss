@@ -1,0 +1,57 @@
+// File Name: _sidebar.scss
+// Description: General global sidebar styles
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+
+
+//sidebar
+
+.sidebar {
+
+	.sidebar__container {
+		@include global_width();
+		@include global_width__cancel($min: 1100px);
+
+		.sidebar__container > * {
+			margin-bottom: 2rem;
+		}
+
+		& > *:first-child {
+			margin-top: 0;
+		}
+
+		& > *:last-child {
+			margin-bottom: 40px;
+		}
+	}
+
+	&__nav {
+		border-left: 1px solid whitesmoke;
+		background-color: whitesmoke;
+	}
+
+	&__element {
+		@include hover {
+			background-color: #cccccc;
+		}
+	}
+	& > * {
+		margin-bottom: 2rem;
+	}
+
+	& > *:last-child {
+		margin-bottom: 0;
+	}
+
+	@media all and (min-width: 1100px) {
+		display: table-cell;
+		table-layout: fixed;
+		vertical-align: top;
+		padding-left: 40px; 
+		width: 35%;
+	}
+}
+
+//hover events

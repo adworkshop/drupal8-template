@@ -1,0 +1,36 @@
+// File Name: _customize_template.scss
+// Description: Add elements, which apply to typography including font-size, line-height, color, etc.
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+//colors
+$color__primary						: #02528a; // #5B7B7A;
+$color__secondary					: #189ad6; // #A17C6B;
+$color__tertiary					: #BFAFA6;
+$color__white							: #ffffff;
+$color__grey							: #999999;
+
+
+//fonts
+$font-family__primary			: 'Libre Baskerville', serif;
+$font-family__secondary		: 'Raleway', sans-serif;
+$font-family__tertiary		: 'Montserrat', sans-serif;
+
+
+//font weights
+$font-weight__light				: 300;
+$font-weight__regular			: 400;
+$font-weight__medium			: 500;
+$font-weight__bold				: 700;
+$font-weight__black				: 900;
+
+
+//backgrounds
+$bg__light  : url();//url(../i/flavor/olive_branch--on_white.png);
+
+@mixin button--dropshadow {
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.5);
+}

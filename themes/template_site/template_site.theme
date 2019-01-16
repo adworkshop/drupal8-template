@@ -1,0 +1,298 @@
+<?php
+
+use Drupal\image\Entity\ImageStyle;
+
+// add class to newsletter signup <form> tag
+function template_site_preprocess_webform(&$variables) {
+    if(method_exists($variables['element']['#webform'],'get') && $variables['element']['#webform']->get('id') == 'newsletter'){
+        $variables['attributes']['class'][] = 'sidebar_newsletter__form';
+    }
+}
+
+/**
+ * put template suggestions in for webform fieldsets
+ * function hook_theme_suggestions_HOOK_alter
+ */
+function template_site_theme_suggestions_fieldset_alter(&$suggestions, $variables){
+    if(isset($variables['element']['#webform_id'])){
+        $suggestions[] = 'fieldset__webform_id__'.$variables['element']['#webform_id'];
+    }
+}
+
+
+/**
+ * put template suggestions in for webforms
+ * function hook_theme_suggestions_HOOK_alter
+ */
+function template_site_theme_suggestions_webform_alter(&$suggestions, $variables){
+    if(method_exists($variables['element']['#webform'],'get')){
+        $suggestions[] = 'webform__id__'.$variables['element']['#webform']->get('id');
+    }
+}
+
+
+/**
+ * put template suggestions in for fields
+ * function hook_theme_suggestions_HOOK_alter
+ */
+function template_site_theme_suggestions_field_alter(&$suggestions, $variables){
+
+    //--------------------------------------
+    // Fields with no wrapper on any bundle
+    //--------------------------------------
+    $fieldsToShowWithoutWrappers = array(
+        'field_promotions',
+        'field_splash_text',
+        'field_ho',
+        'field_header_logo',
+    );
+
+    if(in_array($variables['element']['#field_name'],$fieldsToShowWithoutWrappers)){
+        $suggestions[] = 'field__no_wrapper';
+    }
+
+    //--------------------------------------------
+    // Fields with no wrapper on specific bundles
+    //--------------------------------------------
+    $bundleFieldsToShowWithoutWrappers = array(
+        'homepage_block' => array(
+            'field_body',
+        ),
+        'home_page' => array(
+            'field_featured_'
+        ),
+    );
+
+    if(
+        isset($bundleFieldsToShowWithoutWrappers[$variables['element']['#bundle']])
+        && in_array($variables['element']['#field_name'],$bundleFieldsToShowWithoutWrappers[$variables['element']['#bundle']])
+    ){
+        $suggestions[] = 'field__no_wrapper';
+    }
+
+    // suggestion with the display mode in it, plus all the default stuff
+    //field--node--field-date--event
+    if(
+        isset($variables['element']['#view_mode'])
+        && isset($variables['element']['#entity_type'])
+        && isset($variables['element']['#field_name'])
+        && isset($variables['element']['#bundle'])
+    ){
+        $suggestions[] = 'field'
+            .'__'.$variables['element']['#entity_type']
+            .'__'.$variables['element']['#field_name']
+            .'__'.$variables['element']['#bundle']
+            .'__view_mode_'.$variables['element']['#view_mode'];
+    }
+
+}
+
+function template_site_preprocess_region(&$variables) {
+    if($variables['region'] == 'footer'){
+        $footerMenuBlock = \Drupal::entityManager()->getStorage('block')->load('template_site_footer');
+        if (!empty($footerMenuBlock)){
+            $footerMenuContent = \Drupal::entityManager()
+                ->getViewBuilder('block')
+                ->view($footerMenuBlock);
+            if ($footerMenuContent) {
+                // Add block content to build array
+                $variables['footerMenu'] = $footerMenuContent;
+            }
+        }
+    }
+}
+
+function template_site_preprocess_block(&$variables) {
+
+    // Make "Footer Quicklinks" menu available in footer text block
+    if( $variables['elements']['#id'] == 'template_site_footertextblock' ){
+        $quicklinkBlock = \Drupal::entityManager()->getStorage('block')->load('footerquicklinks');
+        if (!empty($quicklinkBlock)){
+            $quicklinkContent = \Drupal::entityManager()
+                ->getViewBuilder('block')
+                ->view($quicklinkBlock);
+            if ($quicklinkContent) {
+                // Add block content to build array
+                $variables['quicklinks'] = $quicklinkContent;
+            }
+        }
+    }
+
+    // change class on sidebar menu nav tag
+    /*if($variables['elements']['#id'] == 'mainnavigation'){
+        kint($variables['elements']);
+    }*/
+
+    // Signal block template to hide logo link in menu if we're on the homepage
+    /*if( $variables['elements']['#id'] == 'template_site_main_menu' ){
+
+        $variables['#cache']['contexts']['url.path.is_front'];
+
+        if($_SERVER['REQUEST_URI'] == '/'){
+            $variables['hideLogoLink'] = true;
+        }
+
+    }*/
+
+}
+
+function template_site_preprocess_image(&$variables) {
+
+    // Stop drupal from setting the width and height attributes on image tags
+    if(isset($variables['attributes']['width'])){
+        unset($variables['attributes']['width']);
+    }
+    if(isset($variables['attributes']['height'])){
+        unset($variables['attributes']['height']);
+    }
+
+}
+
+function template_site_theme_suggestions_block_alter(&$suggestions, $variables){
+
+    if(isset($variables['elements']['#configuration']['view_mode']) && isset($variables['elements']['#id'])){
+        $suggestions[] = 'block__'.$variables['elements']['#id'].'__view_mode_'.str_replace('-','_',$variables['elements']['#configuration']['view_mode']);
+    }
+
+}
+
+function template_site_preprocess_field(&$variables) {
+
+    if(isset($variables['element']) && $variables['element']['#field_name'] == 'field_image') {
+        foreach($variables['items'] as $key => $item){
+            $variables['items'][ $key ]['content']['#item_attributes']['class'][] = 'mission__image';
+        }
+    }
+
+    // Gather info for directions
+    if(isset($variables['element']) && $variables['element']['#field_name']=='field_output_directions_map'){
+
+        // Get address field from footer for directions
+        $footerContactBlock = Drupal\block\Entity\Block::load('template_site_footercontactblock');
+        if (!empty($footerContactBlock)){
+            $uuid = $footerContactBlock->getPlugin()->getDerivativeId();
+            $block_content = \Drupal::service('entity.repository')->loadEntityByUuid('block_content', $uuid);
+            $variables['address'] = trim($block_content->field_address->value);
+            $variables['latitude'] = trim($block_content->field_latitude->value);
+            $variables['longitude'] = trim($block_content->field_longitude->value);
+        }
+    }
+
+    // Add class to splash image
+    if(isset($variables['element']) && $variables['element']['#field_name']=='field_splash_image'){
+        foreach ($variables['items'] as $index => $item) {
+            $variables['items'][$index]['content']['#item_attributes']['class'][] = 'intro_promo__img';
+        }
+    }
+
+    // Get another image style for homepage gallery images
+    if(isset($variables['element']) && $variables['element']['#field_name']=='field_gallery_images'){
+        foreach($variables['items'] as $itemIndex => $item){
+            $fid = $item['content']['#item']->get('target_id')->getValue();
+            if(method_exists(\Drupal\file\Entity\File::load($fid),'getFileUri')){
+                $uri = \Drupal\file\Entity\File::load($fid)->getFileUri();
+            }
+            $variables['items'][$itemIndex]['#attributes']['data-src'] = \Drupal\image\Entity\ImageStyle::load('1200w')->buildUrl($uri);
+            unset($variables['items'][$itemIndex]['attributes']);
+        }
+    }
+
+}
+
+/**
+ * @param $variables
+ */
+function template_site_preprocess_node(&$variables) {
+
+    // Load the node entity from current route
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+      $node = $variables['node'];
+      $variables['title'] = ($node->hasField('field_h1_page_title') && $node->get('field_h1_page_title')->value) ? $node->get('field_h1_page_title')->value : $node->getTitle();
+
+    }
+
+    //---------------------------------------------------------------------------------
+    // Get edit tabs in node template, by default it's only available in page template
+    //---------------------------------------------------------------------------------
+    $tabsBlock = \Drupal::entityManager()->getStorage('block')->load('template_site_local_tasks');
+    if (!empty($tabsBlock)){
+        $tabsBlockContent = \Drupal::entityManager()
+            ->getViewBuilder('block')
+            ->view($tabsBlock);
+        if ($tabsBlockContent) {
+            // Add block content to build array
+            $variables['tabs'] = $tabsBlockContent;
+        }
+    }
+
+    //-----------------------------------------------------------------------------------------
+    // Make regions available in node templates (really it's just the blocks in those regions)
+    //-----------------------------------------------------------------------------------------
+    $view_mode = $variables['view_mode']; // Retrieve view mode
+    $allowed_view_modes = ['full']; // Array of allowed view modes (for performance so as to not execute on unneeded nodes)
+
+    // If view mode is in allowed view modes list, pass to THEME_add_regions_to_node()
+    if(in_array($view_mode, $allowed_view_modes)) {
+        // Allowed regions (for performance so as to not execute for unneeded region)
+        $allowed_regions = ['below_content','sidebar','sidebar_nav','over_content','no_show'];
+        template_site_add_regions_to_node($allowed_regions, $variables);
+    }
+
+}
+
+
+/**
+ * THEME_add_regions_to_node
+ * So we can print regions in the node template
+ */
+
+function template_site_add_regions_to_node($allowed_regions, &$variables) {
+  // Retrieve active theme
+  $theme = \Drupal::theme()->getActiveTheme()->getName();
+
+  // Retrieve theme regions
+  $available_regions = system_region_list($theme, 'REGIONS_ALL');
+
+  // Validate allowed regions with available regions
+  $regions = array_intersect(array_keys($available_regions), $allowed_regions);
+
+  // For each region
+  foreach ($regions as $key => $region) {
+
+    // Load region blocks
+    $blocks = entity_load_multiple_by_properties('block', array('theme' => $theme, 'region' => $region));
+
+    // Sort ‘em
+    uasort($blocks, 'Drupal\block\Entity\Block::sort');
+
+    //kint($key);
+
+    // Capture viewable blocks and their settings to $build
+    $build = array();
+    foreach ($blocks as $blockKey => $block) {
+      if ($block->access('view')) {
+        $build[$blockKey] = entity_view($block, 'block');
+      }
+    }
+
+    // Add build to region
+    //kint($build);
+    //kint($region);
+    $variables[$region] = $build;
+  }
+}
+
+function remove_comments($input) {
+
+    if(is_string($input)){
+        return preg_replace('/<!--(.|\s)*?-->/', '',$input);
+    }
+    elseif(is_object($input) && method_exists($input,'__toString')){
+        return preg_replace('/<!--(.|\s)*?-->/', '',$input->__toString());
+    }
+    else{
+        return $input;
+    }
+  }
+
+?>

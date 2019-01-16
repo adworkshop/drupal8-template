@@ -1,0 +1,72 @@
+// File Name: _featured_and_listings.scss
+// Description: listings container
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+
+.featured_and_listings{
+
+	position: relative;
+
+	&:after {
+
+		content: "";
+
+
+	}
+
+	.featured_and_listings__container {
+
+		position: relative;
+		z-index: 1;
+
+	}
+
+	.featured_and_listings__title{
+		display: none;
+		padding: 10px 20px;
+		margin: 0;
+		font-size:  2.5rem;
+		font-weight:  bold;
+	}
+
+	hr{
+		display: none;
+	}
+
+	.featured_and_listings__header{
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background-color: $color__grey--xx_dark;
+		color: white;
+
+		@media(min-width: 800px){
+			top: 0;
+			transform: translate(0, -50%);
+			left: 5%;
+		}
+	}
+}
+
+.featured_listing,
+.listings {
+	position: relative;
+	z-index: 1;
+}
+
+.featured_and_listings__background {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	opacity: .6;
+
+	background-image: $bg__light;
+	background-position: center;
+	background-size: auto 25%;
+}
+

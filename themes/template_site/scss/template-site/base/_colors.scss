@@ -1,0 +1,52 @@
+// File Name: _colors.scss
+// Description: Populate with variables and color functions (e.g. lighten(), darken(), etc.)
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+// Colors
+
+$color__primary--xxxxx_light   : lighten($color__primary, 67%);
+$color__primary--xxxx_light   : lighten($color__primary, 50%);
+$color__primary--xxx_light   : lighten($color__primary, 40%);
+$color__primary--xx_light   : lighten($color__primary, 30%);
+$color__primary--x_light    : lighten($color__primary, 20%);
+$color__primary--light      : lighten($color__primary, 10%);
+$color__primary--dark       : darken($color__primary, 10%);
+$color__primary--x_dark     : darken($color__primary, 20%);
+$color__primary--xx_dark    : darken($color__primary, 30%);
+$color__primary--xx_dark    : darken($color__primary, 40%);
+$color__primary--xxx_dark    : darken($color__primary, 50%);
+
+
+$color__secondary--xxxx_light   : lighten($color__secondary, 50%);
+$color__secondary--xxx_light   : lighten($color__secondary, 40%);
+$color__secondary--xx_light : lighten($color__secondary, 30%);
+$color__secondary--x_light  : lighten($color__secondary, 20%);
+$color__secondary--light    : lighten($color__secondary, 10%);
+$color__secondary--dark     : darken($color__secondary, 10%);
+$color__secondary--x_dark   : darken($color__secondary, 20%);
+$color__secondary--xx_dark  : darken($color__secondary, 30%);
+
+
+$color__tertiary--xx_light  : lighten($color__tertiary, 30%);
+$color__tertiary--x_light   : lighten($color__tertiary, 20%);
+$color__tertiary--light     : lighten($color__tertiary, 10%);
+$color__tertiary--dark      : darken($color__tertiary, 10%);
+$color__tertiary--x_dark    : darken($color__tertiary, 20%);
+$color__tertiary--xx_dark   : darken($color__tertiary, 30%);
+
+
+$color__white--dark         : darken($color__white, 10%);
+$color__white--x_dark 	    : darken($color__white, 20%);
+$color__white--xx_dark   	  : darken($color__white, 30%);
+
+
+$color__grey--xxx_light : lighten($color__grey, 40%);
+$color__grey--xx_light : lighten($color__grey, 35%);
+$color__grey--x_light  : lighten($color__grey, 20%);
+$color__grey--light    : lighten($color__grey, 10%);
+$color__grey--dark     : darken($color__grey, 10%);
+$color__grey--x_dark   : darken($color__grey, 20%);
+$color__grey--xx_dark  : darken($color__grey, 30%);
+$color__grey--xxx_dark  : darken($color__grey, 50%);

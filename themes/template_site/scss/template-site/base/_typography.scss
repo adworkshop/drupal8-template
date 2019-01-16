@@ -1,0 +1,207 @@
+// File Name: _load_first.scss
+// Description: Add elements, which apply to typography including font-size, line-height, color, etc.
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+// Fonts
+
+html {
+
+	font-size: 16px;
+
+	@media (min-width: 960px){
+		html {font-size: 17px;}
+	}
+
+	@media (min-width: 1100px){
+		html {font-size: 18px;}
+	}
+
+	@media (min-width: 1200px){
+		html {font-size: 18px;}
+	}
+}
+
+p {
+	font-family: $font-family__secondary;
+	margin-top: 1rem;
+	font-size: 1rem;
+	line-height: 1.5em;
+	color: $color__grey--dark;
+}
+
+a {
+	font-family: $font-family__secondary;
+	color: $color__secondary;
+}
+
+.no-touch a:hover {
+	color: $color__secondary--x_dark;
+}
+
+h1, h2, h3, h4, h5, h6{
+	font-family: sans-serif;
+	font-weight: normal;
+	margin-top: 1.25em;
+	margin-bottom: .25em;
+}
+
+h1 {
+	font-family: $font-family__primary;
+	font-size: 2.75rem;
+	line-height: 1.2em;
+
+	@media(min-width: 800px){
+		font-size: 3.25rem;
+	}
+
+	@media(min-width: 960px){
+		font-size: 4rem;
+	}
+}
+
+h2 {
+	font-family: $font-family__primary;
+	font-size: 2.75rem;
+	line-height: 1.1em;
+	color: $color__primary--dark;
+	letter-spacing: -1px;
+
+	@media(min-width: 800px){
+		font-size: 3rem;
+	}
+
+	@media(min-width: 960px){
+		
+		font-size: 3.25rem;
+	}
+}
+
+h3 {
+	font-family: $font-family__secondary;
+	font-size: 2rem;
+	line-height: 1.2em;
+	text-transform: none;
+	color: $color__primary--x_light;
+
+	@media(min-width: 800px) {
+		font-size: 2.25rem;
+	}
+	
+	@media(min-width: 960px) {
+		font-size: 2.75rem;
+	}
+}
+
+h4 {
+
+	color: $color__grey--xx_dark;
+	font-size: 1.25rem;
+	line-height: 1.2em;
+	font-weight: $font-weight__bold;
+
+	@media(min-width: 800px) {
+		font-size: 1.25rem;
+	}
+	
+	@media(min-width: 960px) {
+		font-size: 1.5rem;
+	}
+}
+
+li {
+	font-size: 1rem;
+	font-family: $font-family__secondary;
+}
+
+a {
+	color: grey;
+	text-decoration: underline;
+}
+
+strong{
+	font-weight: 600;
+}
+
+blockquote{
+	position: relative;
+	padding-left: 70px;
+	margin: 1.5rem 0;
+	line-height: 1.5em;
+	color: $color__grey--dark;
+	font-style: italic;
+	background-color: $color__primary--xxxxx_light;
+	padding: 2rem 2rem 2rem 5rem;
+
+	p {
+		font-size: 1.25rem;
+
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+
+	&:before{
+		content:"\201C";
+		position: absolute;
+		top: 2rem;
+		left: 1rem;
+		font-size: 120px;
+		line-height: 80%;
+		color: $color__primary;
+		font-style: normal;
+	}
+
+
+}
+
+
+.main{
+	
+	ul, ol {
+		font-size: 0.85rem;
+		line-height: 1.5em;
+		margin-top: 1.25em;
+		margin-bottom: 1.25rem;
+		color: $color__grey--x_dark;
+	}
+
+	ul{
+		list-style-type: circle;
+	}
+
+	ol {
+		list-style-type: decimal;
+	}
+
+	li{
+		margin-top: .25rem;
+		margin-left: 16px;
+	}
+
+	a {
+		font-family: $font-family__secondary;
+		color: $color__secondary;
+		text-decoration: underline;
+	}
+
+	.no-touch a:hover {
+		color: $color__secondary--x_dark;
+	}
+
+	figcaption {
+		margin-top: 1rem;
+		padding-bottom: 1rem;
+		font-size: 1rem;
+		line-height: 1.75em;
+		font-family: $font-family__primary;
+		color: $color__grey--x_dark;
+		font-style: italic;
+		border-bottom: 1px solid $color__grey--xx_light;
+	}
+
+	img {
+		display: block;
+	}
+}

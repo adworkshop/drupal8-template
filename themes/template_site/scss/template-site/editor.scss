@@ -1,0 +1,40 @@
+// --------------------------------------------------
+// STYLES
+// --------------------------------------------------
+// This is our main SCSS file that imports everything
+// that gets compiled into style.css
+
+// Import order:
+// 01. Encoding
+// 02. Base
+// 03. Helpers
+// 04. Vendors
+// 05. Layouts
+// 06. Components
+// 07. Modules
+// 09. Overrides - Vendor
+
+
+
+//
+// 01. Encoding
+// --------------------------------------------------
+@charset "UTF-8";
+
+
+//
+// 02. Base
+// --------------------------------------------------
+// Client site globals
+
+@import "base/customize_template";			@import "../site-specific/base/customize_template";
+@import "base/resets";
+@import "base/base";
+@import "base/colors"; 									@import "../site-specific/base/colors_overrides";
+@import "base/typography";
+@import "base/drupal.scss";
+@import "../site-specific/base/base_overrides";
+
+// Font-Awesome
+$fa-font-path: "../fonts/vendors/font-awesome";
+@import "vendors/font-awesome-4.7.0/scss/font-awesome";

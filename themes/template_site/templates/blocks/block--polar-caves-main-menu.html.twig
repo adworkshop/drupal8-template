@@ -1,0 +1,28 @@
+<div class="navigation">
+    <img class="navigation__curve" src="/themes/template_site/assets/i/edges/header_curve.png">
+    <div id="generalNav">
+        <div class="navContainer">
+            <div class="navInnerContainer">
+
+                <!--Header Logo Region-->
+                <div class="logo-container">
+                    {# original test for home page   if hideLogoLink is not defined #}
+                    <a class="logo-container_inner" href="/">
+                    <img src="/themes/template_site/assets/i/logos/header__template_site_logo.svg" alt="Polar Caves">
+                    </a>
+                </div>
+                <!--END Header Logo Re.gion-->
+
+                <!--Mobile Btn Set-->
+                <div class="mobileBtnWrapper">
+                    <a href="#menu" class="mainMenuToggle fa-bars"></a>
+                </div>
+
+                <nav id="mainMenu" role="navigation" class="menuContainer" style="display: none;">
+                {{ content }}
+                </nav>
+
+            </div>
+        </div>
+    </div>
+</div>

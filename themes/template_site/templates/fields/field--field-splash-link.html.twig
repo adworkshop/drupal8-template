@@ -1,0 +1,5 @@
+{% for item in items %}
+    <div class="button button--bg_secondary button--border_none">
+        <a href="{{ item.content['#url'] }}" class="button__link">{{ item.content['#title'] }}</a>
+    </div><!--END .button-->
+{% endfor %}

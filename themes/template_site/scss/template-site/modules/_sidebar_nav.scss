@@ -1,0 +1,143 @@
+// File Name: _sidebar_nav.scss
+// Description: internal, sidebar promo
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+//sidebar navigation
+
+.sidebar {
+
+	.sidebar_nav__header {
+		h3 {
+			margin-top: 0;
+			font-size: 2.2rem;
+		}
+	}
+}
+
+
+.sidebar_nav,
+.sidebar_newsletter{ display: block; width: 100%;}
+.sidebar_nav{border-left: none;}
+
+
+.sidebar_nav {
+	display: none;
+
+	@media(min-width: 1100px) {
+		display: block;
+	}
+}
+
+.sidebar {
+
+	& ul,
+	& ol { margin-bottom: 0;}
+	& a { text-decoration: none;}
+	& li { margin-top: 0;}
+
+	ul.adwMenu ul {
+		border-top: 1px solid $color__grey--xx_light;
+		border-bottom: 1px solid $color__grey--xx_light;
+	}
+
+	ul.adwMenu li {
+		text-align: left;
+		border-bottom: 2px solid $color__grey--xx_light;
+		background-color: transparent;
+	}
+
+	ul.adwMenu li:last-child {
+		border-bottom: 0;
+	}
+
+	ul.adwMenu li > a {
+		position: relative;
+		border: none;
+		padding-top: 20px;
+		padding-bottom: 20px;
+		padding-left: 20px;
+	}
+
+	ul.adwMenu li > a:before {
+		content:"\f054";
+		position: absolute;
+		left: 0;
+		display: inline-block;
+		font-size: 15px;
+		vertical-align: middle;
+		font-family: "FontAwesome";
+		color: $color__secondary--xxx_light;
+		background-color: white;
+	}
+
+	ul.adwMenu ul.subMenu li ul.subMenu{
+		display: none;
+	}
+
+	ul.adwMenu li .openChildInner:before{
+		top: 23px;
+	}
+ 
+	.sidebar_nav{
+		padding: 0;
+		vertical-align: top;
+		background-color: transparent;
+		border-left: none;
+	}
+
+	.sidebar_nav__container {
+		margin-bottom: 4rem;
+	}
+
+	.sidebar_nav ul.adwMenu{
+		margin-top: 0;
+	}
+
+
+	/*TIER 1*/
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li .openChild{background: transparent; color: $color__secondary; height: 61px;}/*dropdown tab - dropdown closed*/
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li .openChild{@include hover{ background: transparent; color: $color__secondary--dark;}} /*dropdown tab - dropdown closed*/
+
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li.over > .openChild { background: transparent; color: $color__secondary--dark;}/*dropdown tab - dropdown open*/
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li.over > .openChild{@include hover{ background: transparent; color: $color__secondary;}} /*dropdown tab - dropdown open - hover*/
+
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li a { background: transparent; color: $color__grey--x_dark; padding-left: 2rem;}/*nav element*/
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li a{@include hover{ color: $color__grey--dark;}} /*nav element - hover*/
+
+
+	/*TIER 2*/
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li ul li .openChild{background: #f2f2f2; height: 61px;}/*dropdown tab - dropdown closed*/
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li ul li .openChild{@include hover{ background: #dbdbdb; color: white;}} /*dropdown tab - dropdown closed*/
+
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li ul li.over > .openChild{background: #dbdbdb; color: white;}/*dropdown tab - dropdown open*/
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li ul li.over > .openChild{@include hover{ background: #d4d4d4; color: #111d3b;}} /*dropdown tab - dropdown open - hover*/
+
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li ul > li a{ padding-left: 3rem; padding-right: 1rem; background: #f2f2f2; color: $color__grey--x_dark;}/*nav element*/
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li ul > li a{@include hover{ background: #e8e8e8; color: #858585;}}/*nav element - hover*/
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li ul > li { border-bottom: 2px solid white;}
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li ul > li:last-child { border-bottom: none;}
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li ul > li a:before{display: none;}
+
+
+	/*TIER 3*/
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li ul li ul li .openChild{background: blue; height: 99%;}/*dropdown tab - dropdown closed*/
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li ul li ul li .openChild{@include hover{ background: red; color: red;}} /*dropdown tab - dropdown closed - hover*/
+
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li ul li ul li.over > .openChild{background: purple; color: purple;}/*dropdown tab - dropdown open*/
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li ul li ul li.over > .openChild{@include hover{ background: red; color: #111d3b;}} /*dropdown tab - dropdown open - hover*/
+
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li ul li ul > li a{background: #dbdbdb; color: white;}/*nav element*/
+	.sidebar_nav > .menuContainer > ul.adwMenu > ul > li ul li ul > li a{@include hover{ background: #d1d1d1; color: white;}}/*nav element - hover*/
+}
+//global widths
+
+.sidebar_nav, .sidebar_promo, .sidebar_newsletter {
+	//padding-left: 2rem;
+	//padding-right: 2rem;
+
+	@media(min-width: 960px) {
+		padding: 0;
+	}
+}

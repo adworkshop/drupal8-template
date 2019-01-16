@@ -1,0 +1,98 @@
+directions:
+  version: 1.x
+  js:
+    https://maps.googleapis.com/maps/api/js?key=AIzaSyD7KiitC6shtW9WeptmS68HjW3z9zUwcXs: {}
+    js/custom/directions.js: {}
+
+internal:
+  version: 1.x
+  css:
+    theme:
+      css/custom/base.css: {}
+      css/custom/adw-menu.css: {}
+      css/style.css: {}
+      https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700|Montserrat:400,400i,700|Raleway:400,400i,700: {}
+      css/custom/developer-overrides.css: {}
+  js:
+    js/custom/quicklinks.js: {}
+    js/custom/enquire__init.js: {}
+    js/custom/match_height__init.js: {}
+
+homepage:
+  version: 1.x
+  css:
+    theme:
+      css/custom/base.css: {}
+      css/custom/adw-menu.css: {}
+      css/style.css: {}
+      plugins/animate-v.3.5.1/animate.css: {}
+      https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700|Montserrat:400,400i,700|Raleway:400,400i,700: {}
+      css/custom/developer-overrides.css: {}
+  js:
+    #js/custom/owl_carousel__init.js: {}
+    js/custom/quicklinks.js: {}
+    js/custom/modernizr_query__init.js: {}
+    js/custom/enquire__init.js: {}
+    js/custom/match_height__init.js: {}
+
+fancybox:
+  version: 2.1.5
+  css:
+    theme:
+      plugins/fancybox/source/jquery.fancybox.css?v=2.1.5: {}
+      plugins/fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5: {}
+      plugins/fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7: {}
+  js:
+    plugins/fancybox/source/jquery.fancybox.pack.js: {}
+    plugins/fancybox/source/helpers/jquery.fancybox-buttons.js: {}
+    plugins/fancybox/source/helpers/jquery.fancybox-media.js: {}
+    plugins/fancybox/source/helpers/jquery.fancybox-thumbs.js: {}
+    js/custom/fancybox_init.js: {}
+
+custom-css:
+  version: 1.x
+  css:
+    theme:
+      plugins/font-awesome-4.7.0/css/font-awesome.min.css: {}
+
+custom-js:
+  version: 1.x
+  js:
+    js/custom/custom.js: {}
+    js/custom/adw-menu.js: {}
+    js/custom/event-tracking.js: {}
+  dependencies:
+    - core/jquery
+    - core/modernizr
+
+libs-js:
+  version: 1.x
+  js:
+    js/libs/jquery.easing.1.3.js: {}
+    plugins/wow-v.1.1.3/wow.min.js: {}
+
+owl-slider:
+  version: 1.x
+  js:
+    plugins/owl-carousel-v.2.2.1/dist/owl.carousel.min.js: {}
+    js/custom/owl_carousel__init.js: {}
+  css:
+    theme:
+      plugins/owl-carousel-v.2.2.1/dist/assets/owl.carousel.min.css: {}
+      plugins/owl-carousel-v.2.2.1/dist/assets/owl.theme.default.min.css: {}
+
+enquire:
+  version: 1.x
+  js:
+    plugins/enquire-v.2.1.2/enquire.min.js: {}
+    js/custom/enquire__init.js: {}
+  dependencies:
+    - core/jquery
+
+match-height:
+  version: 1.x
+  js:
+    plugins/jquery-match-height-v.0.7.2/jquery.matchHeight-min.js: {}
+    js/custom/match_height__init.js: {}
+  dependencies:
+   - core/jquery

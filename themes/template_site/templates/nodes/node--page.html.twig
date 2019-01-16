@@ -1,0 +1,148 @@
+
+{#------------#}
+{# BREADCUMBS #}
+{#------------#}
+{{ over_content }}
+
+{#--------------#}
+{# MAIN CONTENT #}
+{#--------------#}
+<div class="main">
+
+    <!-- PAGE HEADING ------------------------------------>
+    <div class="page_heading">
+        <div class="page_heading__container global_width">
+            <div class="page_heading__header">
+                <h1>{{ title }}</h1>
+            </div>
+            {{ content.field_hero_text }}
+        </div>
+    <!--END .page_heading-->
+    </div>
+    <!-- END PAGE HEADING -------------------------------->
+
+    {#----------------------#}
+    {# SIDEBAR IF STATEMENT #}
+    {#----------------------#}
+    {%
+        if
+            strip_tags(remove_comments(sidebar_nav|render))|trim is not empty
+            or remove_comments(content.field_promotions|render)|trim is not empty
+            or (
+                content.field_hide_[0] is not defined
+                or content.field_hide_[0]['#markup'] != 'On'
+            )
+    %}
+        {% set has_sidebar = true %}
+        {% set container_classes = 'content_and_sidebar__container' %}
+    {% else %}
+        {% set has_sidebar = false %}
+        {% set container_classes = 'content_and_sidebar__container' %}
+        {% set container_classes = 'content_and_sidebar__container content_and_sidebar__container--no-sidebar' %}
+    {% endif %}
+
+    <!-- PAGE CONTENT ------------------------------------>
+    <div class="content_and_sidebar">
+        <div class="{{ container_classes }}">
+            <div class="body_section">
+
+                {#-----------------#}
+                {# FEAUTURED IMAGE #}
+                {#-----------------#}
+                {% if remove_comments(content.field_feature|render)|trim|raw is not empty %}
+                    <div class="featured_image">
+                        <div class="featured_image__container">
+
+                            {{ content.field_feature|render|trim|raw }}
+                            <div class="featured_image__caption">
+                                {% 
+                                    if 
+                                        remove_comments(content.field_featured_image_|render)|trim is not empty
+                                        or remove_comments(content.field_featured_image_text|render)|trim is not empty
+                                %}
+                                    <div class="featured_image__caption_container">
+                                        {{ content.field_featured_image_ }}
+                                        {{ content.field_featured_image_text }}
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div><!--END .featured_image-->
+                {% else %}
+                    {% set extraContentClass = ' noTopMargin' %}
+                {% endif %}
+
+                {#-------------------#}
+                {# MAIN BODY CONTENT #}
+                {#-------------------#}
+                <div class="copy copy--internal{{ extraContentClass }}">
+                    <div class="copy__container">
+                        {{ tabs }}
+                        {{ no_show.template_site_messages }}
+                        {{ content.body }}
+                        {{ no_show.template_site_webform_2 }}
+                        {{ content.field_output_directions_map }}
+                    </div>
+                </div>
+
+                {#----------#}
+                {# LISTINGS #}
+                {#----------#}
+                {% if remove_comments(content.field_listings|render)|trim is not empty %}
+                    <div class="listings listings--internal">
+                    <div class="listings__container global_width">
+                    {{ content.field_listings }}
+                    </div>
+                    </div>
+                {% endif %}
+
+            </div>
+
+            {#---------#}
+            {# SIDEBAR #}
+            {#---------#}
+            {%
+                if has_sidebar == true
+            %}
+                <div class="sidebar">
+                <div class = "sidebar__container">
+
+                {#--------------#}
+                {# SIDEBAR MENU #}
+                {#--------------#}
+                {{ sidebar_nav }}
+
+                {#----------------#}
+                {# SIDEBAR PROMOS #}
+                {#----------------#}
+                {{ content.field_promotions }}
+
+                {#------------------------#}
+                {# NEWSLETTER SIGNUP FORM #}
+                {#------------------------#}
+                {% if content.field_hide_[0] is not defined or content.field_hide_[0]['#markup'] != 'On' %}
+                    {{ sidebar }}
+                {% endif %}
+
+                </div>
+                </div><!--END .sidebar-->
+            {% endif %}
+
+            </div>
+    </div><!--END .global_width-->
+
+    {#---------------#}
+    {# PHOTO GALLERY #}
+    {#---------------#}
+    {% if remove_comments(content.field_gallery_images|render)|trim|raw is not empty %}
+        {{ attach_library('template_site/fancybox') }}
+        {{ content.field_gallery_images }}
+    {% endif %}
+
+</div><!--END .main-->
+
+{#----------#}
+{# BOOK NOW #}
+{#----------#}
+{{ book_now }}

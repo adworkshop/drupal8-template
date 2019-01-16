@@ -1,0 +1,112 @@
+
+{#--------------#}
+{# SPLASH IMAGE #}
+{#--------------#}
+<div class="intro_promo">
+
+    <div class="intro_promo__container">
+
+    {#--------------#}
+    {# Splash Image #}
+    {#--------------#}
+    {{ content.field_splash_image }}
+
+    {#-----------------------#}
+    {# Box over splash image #}
+    {#-----------------------#}
+    {%
+        if(
+            remove_comments(content.field_spla|render)|trim is not empty
+            or remove_comments(content.field_splash_text|render)|trim is not empty
+            or remove_comments(content.field_splash_link|render)|trim is not empty
+        )
+    %}
+       
+            <div class="copy">
+                <div class="copy__container">
+                    <div class="copy__header">
+                        {{ content.field_spla }}
+                    </div>
+                    <div class="copy__body">
+                    {{ content.field_splash_text }}
+                    {{ content.field_splash_link }}
+                    </div>
+                </div>
+            </div>
+
+    {% endif %}
+
+{{ tabs }}
+    </div>
+</div>
+
+
+{#----------------------------#}
+{# Homepage Block (paragraph) #}
+{#----------------------------#}
+{{ content.field_ho }}
+
+
+{#--------------------#}
+{# Listings Container #}
+{#--------------------#}
+{%
+    if
+        remove_comments(content.field_homepage_listing|render)|trim is not empty
+        or remove_comments(content.field_featured_|render)|trim is not empty
+        or remove_comments(content.field_listings_paragraphs|render)|trim is not empty
+%}
+    <div class="featured_and_listings">
+        <div class = "featured_and_listings__container">
+
+            {#---------------------#}
+            {# Listings Block Title#}
+            {#---------------------#}
+            {{ content.field_homepage_listing }}
+
+            {#------------------#}
+            {# Featured Listing #}
+            {#------------------#}
+            {{ content.field_featured_ }}
+
+            {#-----------#}
+            {# Seperator #}
+            {#-----------#}
+            {%
+                if
+                    (
+                        remove_comments(content.field_homepage_listing|render)|trim is not empty
+                        or remove_comments(content.field_featured_|render)|trim is not empty
+                    )
+                    and remove_comments(content.field_listings_paragraphs|render)|trim is not empty
+            %}
+                <hr noshade/>
+            {% endif %}
+
+            {#----------#}
+            {# Listings #}
+            {#----------#}
+            {% if remove_comments(content.field_listings_paragraphs|render)|trim is not empty  %}
+            <div class="listings">
+
+                <div class="listings__container global_width">
+
+                    <div class="copy">
+                        <div class="copy__header">
+                            <h3 class="copy__upper_sub">{{ content.field_normal_listings_title }}</h3>
+                        </div>
+                    </div>
+            {{ content.field_listings_paragraphs }}
+
+            {% endif %}
+
+            <div class="featured_and_listings__background"></div>
+        </div>
+    </div>
+{% endif %}
+
+
+{#---------------#}
+{# Image Gallery #}
+{#---------------#}
+{{ content.field_gallery_images }}

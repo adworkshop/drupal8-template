@@ -1,0 +1,67 @@
+// File Name: _base.scss
+// Description: 
+// Used by:
+// Dependencies:
+// ------------------------------------------------------------
+
+// Transitions
+
+$all: all .3s ease-in-out;
+$all--slow: all .35s ease-in-out;
+$all--x_slow: all .4s cubic-bezier(0.700, -0.005, 0.185, 1.000);
+
+
+img {image-rendering: optimizeQuality; -ms-interpolation-mode: bicubic;}
+
+a {
+-webkit-transition: color .2s ease-in-out;
+-moz-transition: color .2s ease-in-out;
+-o-transition: color .2s ease-in-out;
+-ms-transition: color .2s ease-in-out;
+transition: color .2s ease-in-out;
+}
+
+a, a:link, a:visited, a:active, a:hover, img, a img {
+border: none;
+outline: none;
+text-decoration:none;
+}
+
+b, strong {font-weight: 700;}
+em {font-style: italic;}
+sup {font-size: 40%; vertical-align: top;}
+
+
+*,
+*:after,
+*:before {
+-webkit-box-sizing: border-box;
+-moz-box-sizing: border-box;
+box-sizing: border-box;
+}
+
+* {text-rendering: optimizeLegibility;}
+html.touch * {text-rendering: optimizeSpeed;}
+
+html {height: 100%; font-size: 13px;}
+body.show-overlay {height: 100%;}
+
+html {
+image-rendering: -moz-crisp-edges;
+-webkit-font-smoothing: antialiased;
+-webkit-text-size-adjust: 100%;
+-ms-text-size-adjust: 100%;
+}
+
+body {
+font-family: sans-serif;
+font-weight:400;
+line-height: 1;
+color: #222;
+background: #FFF;
+overflow-x: hidden;
+}
+
+body.navigation-is-open {
+	height:100%; overflow:hidden;
+}

@@ -1,0 +1,45 @@
+{% for item in items %}
+
+    {% if item.content['#markup'] == 'On' %}
+
+        {{ attach_library('template_site/directions') }}
+
+        <div class="directions">
+          <div class="directions__container">
+            <div id="map_canvas" data-latitude="{{ latitude }}" data-longitude="{{ longitude }}" ></div>
+
+            <div id="directions-form-container" class="clearfix">
+
+              <p>Enter your "From" location and click "Get Directions".</p>
+
+              <form action="#" name="directions_form" onSubmit="" class="clearfix" id="directions-form">
+
+                <div class="form-item from">
+                  <label for="fromAddress">From:</label>
+                  <input type="text" size="40" id="fromAddress" name="from" value=""/>
+                </div>
+
+                <div class="form-item to">
+                  <label for="toAddress">To:</label>
+                  <input type="text" size="40" id="toAddress" name="to" value="{{ address }}" readonly="readonly" />
+                </div>
+
+                <div class="directions-form-submit">
+                  <input name="submit" type="submit" value="Get Directions!" />
+                </div>
+
+              </form>
+
+              <div id="directions" class="clearfix">
+                <div id="directions-inner"></div>
+                <div class="directions-form-print">
+                  <a href="" class="whiteGreyBtn printPage">Print This Page</a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+    {% endif %}
+
+{% endfor %}
