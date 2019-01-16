@@ -1,0 +1,25 @@
+uuid: 2d0c78f5-8d57-4d4b-9282-6a97d9b803a5
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:header_logo:e5388ed4-8ed2-421e-b5b8-91c6818793f4'
+  module:
+    - block_content
+  theme:
+    - template_site
+id: headerlogoblock
+theme: template_site
+region: header
+weight: -7
+provider: null
+plugin: 'block_content:e5388ed4-8ed2-421e-b5b8-91c6818793f4'
+settings:
+  id: 'block_content:e5388ed4-8ed2-421e-b5b8-91c6818793f4'
+  label: 'Header Logo Block'
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

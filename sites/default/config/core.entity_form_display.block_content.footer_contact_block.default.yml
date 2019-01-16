@@ -1,0 +1,159 @@
+uuid: 82304ad7-de6e-45b2-acaa-7bcc6a0e83c2
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.footer_contact_block
+    - field.field.block_content.footer_contact_block.field_address
+    - field.field.block_content.footer_contact_block.field_email
+    - field.field.block_content.footer_contact_block.field_facebook
+    - field.field.block_content.footer_contact_block.field_footer_image
+    - field.field.block_content.footer_contact_block.field_instagram_link
+    - field.field.block_content.footer_contact_block.field_latitude
+    - field.field.block_content.footer_contact_block.field_longitude
+    - field.field.block_content.footer_contact_block.field_phone_number
+    - field.field.block_content.footer_contact_block.field_twitter_link
+    - field.field.block_content.footer_contact_block.field_youtube_link
+    - image.style.thumbnail
+  module:
+    - field_group
+    - image
+third_party_settings:
+  field_group:
+    group_social_links_links:
+      children:
+        - field_facebook
+        - field_instagram_link
+        - field_twitter_link
+        - field_youtube_link
+      parent_name: ''
+      weight: 7
+      format_type: fieldset
+      format_settings:
+        id: ''
+        classes: ''
+        description: ''
+        required_fields: true
+      label: 'Social Links'
+    group_coordinates:
+      children:
+        - field_latitude
+        - field_longitude
+      parent_name: group_location
+      weight: 4
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: ''
+        required_fields: true
+      label: Coordinates
+    group_location:
+      children:
+        - field_address
+        - group_coordinates
+      parent_name: ''
+      weight: 2
+      format_type: tab
+      format_settings:
+        id: ''
+        classes: ''
+        formatter: open
+        description: 'This information is also used by the map block.'
+        required_fields: true
+      label: Location
+id: block_content.footer_contact_block.default
+targetEntityType: block_content
+bundle: footer_contact_block
+mode: default
+content:
+  field_address:
+    weight: 3
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_email:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_facebook:
+    weight: 6
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_footer_image:
+    weight: 1
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_instagram_link:
+    weight: 7
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_latitude:
+    weight: 26
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_longitude:
+    weight: 27
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_phone_number:
+    weight: 5
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_twitter_link:
+    weight: 8
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_youtube_link:
+    weight: 9
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  info:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden: {  }

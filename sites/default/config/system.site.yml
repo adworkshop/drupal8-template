@@ -1,0 +1,15 @@
+uuid: b9807a91-1c0e-47f8-93b8-1aeda32a6e51
+name: 'Template Site'
+mail: drupal@adworkshop.com
+slogan: ''
+page:
+  403: ''
+  404: ''
+  front: /node/1
+admin_compact_mode: false
+weight_select_max: 100
+langcode: en
+default_langcode: en
+_core:
+  default_config_hash: AyT9s8OUcclfALRE_imByOMgtZ19eOlqdF6zI3p7yqo
+mail_notification: ''

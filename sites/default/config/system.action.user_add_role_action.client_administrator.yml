@@ -1,0 +1,14 @@
+uuid: 2ff4e956-a9df-4d5a-938b-0a2c1857bd74
+langcode: en
+status: true
+dependencies:
+  config:
+    - user.role.client_administrator
+  module:
+    - user
+id: user_add_role_action.client_administrator
+label: 'Add the Client Administrator role to the selected users'
+type: user
+plugin: user_add_role_action
+configuration:
+  rid: client_administrator

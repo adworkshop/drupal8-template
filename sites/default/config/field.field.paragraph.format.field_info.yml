@@ -1,0 +1,19 @@
+uuid: 13b2fad1-01ed-4785-a828-f74cdedd189f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_info
+    - paragraphs.paragraphs_type.format
+id: paragraph.format.field_info
+field_name: field_info
+entity_type: paragraph
+bundle: format
+label: 'Info Title'
+description: 'i.e. "Price"'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,13 @@
+uuid: 37451bd0-f31c-4f54-a54a-15808217c7c5
+langcode: en
+status: true
+dependencies:
+  module:
+    - cacheflush_ui
+_core:
+  default_config_hash: '-o9JhR9zixWxOmk86Rb6hxN0ARVi24hF2DbrdP6BQuo'
+id: cacheflush_nomenu_action
+label: 'Remove menu entry'
+type: cacheflush
+plugin: cacheflush_nomenu_action
+configuration: {  }

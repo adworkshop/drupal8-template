@@ -1,0 +1,17 @@
+uuid: 4ac813c1-0873-4381-907a-2d5ce7672a9e
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Promotions
+type: promotions
+description: 'Promotions are used to provide links on pages to related content.'
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

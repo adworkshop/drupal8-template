@@ -1,0 +1,15 @@
+uuid: d577960b-3539-4afc-afae-ad95dc9139ee
+langcode: en
+status: true
+dependencies: {  }
+name: 900h
+label: 900h
+effects:
+  d0d131d9-a11d-4aa9-a0c6-b2baa5a504ac:
+    uuid: d0d131d9-a11d-4aa9-a0c6-b2baa5a504ac
+    id: image_scale
+    weight: 1
+    data:
+      width: null
+      height: 900
+      upscale: false

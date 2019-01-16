@@ -1,0 +1,15 @@
+uuid: a1e4ba23-a5b9-4af5-bbe3-918c75cd3f18
+langcode: en
+status: true
+dependencies: {  }
+name: 1600w
+label: 1600w
+effects:
+  66d46a43-13a6-4495-8d5a-74e3240b8def:
+    uuid: 66d46a43-13a6-4495-8d5a-74e3240b8def
+    id: image_scale
+    weight: 1
+    data:
+      width: 1600
+      height: null
+      upscale: false

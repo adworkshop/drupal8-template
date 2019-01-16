@@ -1,0 +1,19 @@
+uuid: f0e67d16-4ded-4a2b-9aed-10dadf48a68b
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_spla
+    - node.type.home_page
+id: node.home_page.field_spla
+field_name: field_spla
+entity_type: node
+bundle: home_page
+label: 'Splash Title'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

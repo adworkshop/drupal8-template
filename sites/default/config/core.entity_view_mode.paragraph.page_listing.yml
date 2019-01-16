@@ -1,0 +1,10 @@
+uuid: c581f2c8-7675-48cb-b856-0ffc038d4c6f
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.page_listing
+label: 'Listing on a Page'
+targetEntityType: paragraph
+cache: true

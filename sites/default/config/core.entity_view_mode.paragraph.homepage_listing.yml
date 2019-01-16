@@ -1,0 +1,10 @@
+uuid: b9f2ce9d-2eeb-4ec4-bdce-d1a16360df07
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.homepage_listing
+label: 'Homepage Listing'
+targetEntityType: paragraph
+cache: true

@@ -1,0 +1,13 @@
+uuid: 51f51bc7-586c-4ec0-b209-54e8967c16bb
+langcode: en
+status: true
+dependencies:
+  module:
+    - cacheflush_ui
+_core:
+  default_config_hash: WZ75Q7MMpvAj-EuuyK5dtHwvR1xj-7AtzwR3p94A1d8
+id: cacheflush_menu_action
+label: 'Add menu entry'
+type: cacheflush
+plugin: cacheflush_menu_action
+configuration: {  }

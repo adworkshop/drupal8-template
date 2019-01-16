@@ -1,0 +1,36 @@
+uuid: c7468a14-5226-44e7-b621-fc1e5265c7ce
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_listings
+    - node.type.page
+    - paragraphs.paragraphs_type.listings
+  module:
+    - entity_reference_revisions
+id: node.page.field_listings
+field_name: field_listings
+entity_type: node
+bundle: page
+label: Listings
+description: 'Listings are a good way to output formatted lists of information.  Add and arrange listings here.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      listings: listings
+    target_bundles_drag_drop:
+      homepage_middle_block_:
+        weight: 3
+        enabled: false
+      partners:
+        weight: 4
+        enabled: false
+      listings:
+        enabled: true
+        weight: 5
+field_type: entity_reference_revisions

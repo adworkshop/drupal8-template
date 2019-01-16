@@ -1,0 +1,17 @@
+uuid: c30fe9c0-eaf0-4cdb-b35e-43598eb8b60d
+langcode: en
+status: false
+dependencies: {  }
+name: 'Homepage Splash Title'
+format: homepage_splash_title
+weight: 0
+filters:
+  filter_html:
+    id: filter_html
+    provider: filter
+    status: false
+    weight: -10
+    settings:
+      allowed_html: '<a href hreflang> <em> <strong> <cite> <blockquote cite> <code> <ul type> <ol start type> <li> <dl> <dt> <dd> <h3 id> <h5 id> <h6 id> <h4 id class="splash__title--top"> <h2 id class="splash__title--bottom">'
+      filter_html_help: true
+      filter_html_nofollow: false

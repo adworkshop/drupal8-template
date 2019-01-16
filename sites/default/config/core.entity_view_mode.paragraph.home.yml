@@ -1,0 +1,10 @@
+uuid: 82da5235-5cb5-48a8-90d2-e1a34bb7385e
+langcode: en
+status: true
+dependencies:
+  module:
+    - paragraphs
+id: paragraph.home
+label: 'Homepage Featured Listing'
+targetEntityType: paragraph
+cache: true

@@ -1,0 +1,15 @@
+uuid: 12fdc8b8-7241-4929-9dd2-88a6acc3ab81
+langcode: en
+status: true
+dependencies: {  }
+name: 140x80
+label: 140x80
+effects:
+  d2cb9a61-bb17-4362-826d-366ab5d372c3:
+    uuid: d2cb9a61-bb17-4362-826d-366ab5d372c3
+    id: image_scale
+    weight: 1
+    data:
+      width: 140
+      height: 80
+      upscale: false

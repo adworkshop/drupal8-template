@@ -1,0 +1,33 @@
+page_title: Sitemap
+message:
+  value: ''
+  format: basic_html
+show_front: false
+show_titles: true
+show_menus:
+  footer: footer
+  main: main
+  account: '0'
+  admin: '0'
+  devel: '0'
+  tools: '0'
+show_menus_hidden: false
+show_vocabularies:
+  tags: '0'
+show_description: false
+show_count: false
+vocabulary_depth: null
+term_threshold: null
+rss_front: ''
+show_rss_links: 0
+rss_taxonomy: null
+css: true
+order:
+  front: -50
+  menus_account: -49
+  menus_admin: -48
+  menus_devel: -47
+  menus_footer: -45
+  menus_main: -46
+  menus_tools: -44
+  vocabularies_tags: -43

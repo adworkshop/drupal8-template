@@ -1,0 +1,6 @@
+uuid: 3068cb41-664c-45fe-9082-7d65b1a9b641
+langcode: en
+status: true
+dependencies: {  }
+id: format
+label: 'Formatted Info'

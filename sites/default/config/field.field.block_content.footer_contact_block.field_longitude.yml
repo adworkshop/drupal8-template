@@ -1,0 +1,19 @@
+uuid: bc0384a2-2143-4359-83a6-ce24e8d921ef
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.footer_contact_block
+    - field.storage.block_content.field_longitude
+id: block_content.footer_contact_block.field_longitude
+field_name: field_longitude
+entity_type: block_content
+bundle: footer_contact_block
+label: Longitude
+description: 'This is used for directions.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,28 @@
+uuid: d695164a-e697-4266-aea1-ef786a1f2b41
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_splash_text
+    - node.type.home_page
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    full_html: '0'
+    plain_text: '0'
+    restricted_html: '0'
+id: node.home_page.field_splash_text
+field_name: field_splash_text
+entity_type: node
+bundle: home_page
+label: 'Splash Text'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

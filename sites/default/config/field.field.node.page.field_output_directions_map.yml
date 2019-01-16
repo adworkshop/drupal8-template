@@ -1,0 +1,23 @@
+uuid: d67ee75b-4a0d-4ab7-b2c4-aff9e31eb226
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_output_directions_map
+    - node.type.page
+id: node.page.field_output_directions_map
+field_name: field_output_directions_map
+entity_type: node
+bundle: page
+label: 'Output Directions Map'
+description: "Check this box to output directionson this page.<br/>\r\nOnly should be used once, on a directions page.<br/>\r\nThe location directions are provided to are taken from the location set in the <a href=\"/admin/structure/block/block-content\">Footer Contact Block settings page</a>."
+required: false
+translatable: false
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: 'On'
+  off_label: 'Off'
+field_type: boolean

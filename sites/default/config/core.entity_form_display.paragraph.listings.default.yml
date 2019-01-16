@@ -1,0 +1,78 @@
+uuid: 864e49e9-e7dc-49ac-b8a1-09d8155f2c93
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.listings.field_block_link
+    - field.field.paragraph.listings.field_body
+    - field.field.paragraph.listings.field_image
+    - field.field.paragraph.listings.field_information
+    - field.field.paragraph.listings.field_subtitle
+    - field.field.paragraph.listings.field_title
+    - image.style.thumbnail
+    - paragraphs.paragraphs_type.listings
+  module:
+    - image
+    - link
+    - paragraphs
+    - text
+id: paragraph.listings.default
+targetEntityType: paragraph
+bundle: listings
+mode: default
+content:
+  field_block_link:
+    weight: 4
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  field_body:
+    weight: 2
+    settings:
+      rows: 5
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea
+    region: content
+  field_image:
+    weight: 3
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_information:
+    type: entity_reference_paragraphs
+    weight: 5
+    settings:
+      title: 'Formatted Info'
+      title_plural: Info
+      edit_mode: open
+      add_mode: dropdown
+      form_display_mode: default
+    third_party_settings: {  }
+    region: content
+  field_subtitle:
+    weight: 1
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_title:
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+hidden:
+  created: true
+  status: true
+  uid: true

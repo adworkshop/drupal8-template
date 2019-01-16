@@ -1,0 +1,17 @@
+uuid: c11ff24d-8026-475f-b5a4-204dd0530b9a
+langcode: en
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Home Page'
+type: home_page
+description: 'There are only one of these, it''s the homepage.'
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false

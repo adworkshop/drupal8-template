@@ -1,0 +1,39 @@
+uuid: 7fc89f4f-5fd0-4cfd-aaad-4134fb6e1245
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_listings_paragraphs
+    - node.type.home_page
+    - paragraphs.paragraphs_type.listings
+  module:
+    - entity_reference_revisions
+id: node.home_page.field_listings_paragraphs
+field_name: field_listings_paragraphs
+entity_type: node
+bundle: home_page
+label: Listings
+description: 'Add listings here.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      listings: listings
+    target_bundles_drag_drop:
+      format:
+        weight: 5
+        enabled: false
+      homepage_block:
+        weight: 6
+        enabled: false
+      listings:
+        enabled: true
+        weight: 7
+      partners:
+        weight: 8
+        enabled: false
+field_type: entity_reference_revisions

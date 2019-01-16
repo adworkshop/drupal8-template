@@ -1,0 +1,22 @@
+uuid: cabfe56c-24e3-4abf-aa11-f16ab074ecc3
+langcode: en
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - template_site
+_core:
+  default_config_hash: 9EoWV2Lot6FVSr50t4hoKgiz1LIXYWNG-IIPYsWxBqo
+id: template_site_content
+theme: template_site
+region: content
+weight: -8
+provider: null
+plugin: system_main_block
+settings:
+  id: system_main_block
+  label: 'Main page content'
+  provider: system
+  label_display: '0'
+visibility: {  }

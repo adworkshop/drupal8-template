@@ -1,0 +1,15 @@
+uuid: 4db17230-0a85-4e2f-ae54-90ca6f9e7759
+langcode: en
+status: true
+dependencies: {  }
+name: 1800w
+label: 1800w
+effects:
+  25335031-f90b-416c-afcc-7f312c765ac6:
+    uuid: 25335031-f90b-416c-afcc-7f312c765ac6
+    id: image_scale
+    weight: 1
+    data:
+      width: 1800
+      height: null
+      upscale: false

@@ -1,0 +1,7 @@
+uuid: 27e7d384-e9b8-4833-8117-514b7907c853
+langcode: en
+status: false
+dependencies: {  }
+formId: node_promotions_form
+captchaType: default
+label: null

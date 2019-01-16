@@ -1,0 +1,28 @@
+uuid: 3353b37d-2e75-4dd3-868a-3dde936a9a2e
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_body
+    - paragraphs.paragraphs_type.homepage_block
+  module:
+    - allowed_formats
+    - text
+third_party_settings:
+  allowed_formats:
+    basic_html: basic_html
+    full_html: '0'
+    plain_text: '0'
+    restricted_html: '0'
+id: paragraph.homepage_block.field_body
+field_name: field_body
+entity_type: paragraph
+bundle: homepage_block
+label: Body
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

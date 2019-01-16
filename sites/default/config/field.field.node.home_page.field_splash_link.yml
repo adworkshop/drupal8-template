@@ -1,0 +1,23 @@
+uuid: b9497ef0-6995-4225-855c-c46bc6d3947f
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_splash_link
+    - node.type.home_page
+  module:
+    - link
+id: node.home_page.field_splash_link
+field_name: field_splash_link
+entity_type: node
+bundle: home_page
+label: 'Splash Link'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  title: 1
+  link_type: 17
+field_type: link

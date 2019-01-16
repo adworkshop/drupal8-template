@@ -1,0 +1,65 @@
+uuid: e4281a96-d207-4931-bcba-1c532d0c8bc5
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.promotions.body
+    - field.field.node.promotions.field_image
+    - field.field.node.promotions.field_promo_link
+    - image.style.thumbnail
+    - node.type.promotions
+  module:
+    - image
+    - link
+    - text
+id: node.promotions.default
+targetEntityType: node
+bundle: promotions
+mode: default
+content:
+  body:
+    type: text_textarea_with_summary
+    weight: 2
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+  field_image:
+    weight: 1
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
+  field_promo_link:
+    weight: 3
+    settings:
+      placeholder_url: ''
+      placeholder_title: ''
+    third_party_settings: {  }
+    type: link_default
+    region: content
+  status:
+    type: boolean_checkbox
+    settings:
+      display_label: true
+    weight: 121
+    third_party_settings: {  }
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    region: content
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+hidden:
+  created: true
+  path: true
+  promote: true
+  sticky: true
+  uid: true

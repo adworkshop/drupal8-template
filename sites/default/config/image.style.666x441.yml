@@ -1,0 +1,14 @@
+uuid: 4c8a7a38-036c-4c5b-b083-d5011daffb72
+langcode: en
+status: true
+dependencies: {  }
+name: 666x441
+label: 666x441
+effects:
+  1a37bbf4-4b18-41ec-84c8-0e53c9022a5d:
+    uuid: 1a37bbf4-4b18-41ec-84c8-0e53c9022a5d
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 666
+      height: 441

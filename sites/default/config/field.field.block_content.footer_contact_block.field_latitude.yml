@@ -1,0 +1,19 @@
+uuid: 4ad102a3-784f-4755-b6f5-629bc85977f9
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.footer_contact_block
+    - field.storage.block_content.field_latitude
+id: block_content.footer_contact_block.field_latitude
+field_name: field_latitude
+entity_type: block_content
+bundle: footer_contact_block
+label: Latitude
+description: 'This is used for directions.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

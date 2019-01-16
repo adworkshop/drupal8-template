@@ -1,0 +1,8 @@
+uuid: e8fbe2d7-f90c-488f-b0f4-1c448328e720
+langcode: en
+status: true
+dependencies: {  }
+id: header_logo
+label: 'Header Logo'
+revision: 0
+description: ''

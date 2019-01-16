@@ -1,0 +1,19 @@
+uuid: d3c5ebaa-6971-48a4-81dd-83c9a45314a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_h1_page_title
+    - node.type.page
+id: node.page.field_h1_page_title
+field_name: field_h1_page_title
+entity_type: node
+bundle: page
+label: 'H1 Page Title'
+description: "By default the title field will be used for the title as shown in the browser tab as well as the title shown in large text on the page.<br/>\r\nTo override the title shown on the page you can enter a title here."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

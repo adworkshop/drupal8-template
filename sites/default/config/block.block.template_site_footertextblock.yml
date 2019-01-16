@@ -1,0 +1,25 @@
+uuid: 2ad4bc02-9528-4606-b6b9-918b4c65e0d0
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:footer_text_block:0b382d9d-3fd7-42d2-b5da-3f124843628b'
+  module:
+    - block_content
+  theme:
+    - template_site
+id: template_site_footertextblock
+theme: template_site
+region: footer
+weight: -5
+provider: null
+plugin: 'block_content:0b382d9d-3fd7-42d2-b5da-3f124843628b'
+settings:
+  id: 'block_content:0b382d9d-3fd7-42d2-b5da-3f124843628b'
+  label: 'Footer Text Block'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

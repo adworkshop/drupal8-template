@@ -1,0 +1,19 @@
+uuid: 56d8575a-a8a1-4c6a-aa65-43e219abb584
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_homepage_listing
+    - node.type.home_page
+id: node.home_page.field_homepage_listing
+field_name: field_homepage_listing
+entity_type: node
+bundle: home_page
+label: 'Homepage Listing Block Title'
+description: 'Enter a title for the Homepage Listing Block'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

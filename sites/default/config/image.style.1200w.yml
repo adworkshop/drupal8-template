@@ -1,0 +1,15 @@
+uuid: 4a143bf4-58af-4078-830b-7e98d6ac18e1
+langcode: en
+status: true
+dependencies: {  }
+name: 1200w
+label: 1200w
+effects:
+  afc932b9-4172-427e-82ba-4e6238c05519:
+    uuid: afc932b9-4172-427e-82ba-4e6238c05519
+    id: image_scale
+    weight: 1
+    data:
+      width: 1200
+      height: null
+      upscale: false

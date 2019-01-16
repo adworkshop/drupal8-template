@@ -1,0 +1,31 @@
+uuid: b91c92e1-0b7e-4c25-9626-db609ae73d36
+langcode: en
+status: false
+dependencies:
+  config:
+    - filter.format.homepage_bottom_slider
+  module:
+    - ckeditor
+format: homepage_bottom_slider
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Formatting
+          items:
+            - Styles
+  plugins:
+    language:
+      language_list: un
+    stylescombo:
+      styles: "h3.slideshow__superheader|Title 1\r\nh2.slideshow__header|Title 2"
+image_upload:
+  status: false
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: null
+    height: null

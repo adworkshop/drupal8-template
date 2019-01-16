@@ -1,0 +1,15 @@
+uuid: 3fa9355b-601e-4f1d-ab9e-19a0b06556ec
+langcode: en
+status: true
+dependencies: {  }
+name: 600w
+label: 600w
+effects:
+  ef24529f-fd94-45b7-8d4e-7b915a378633:
+    uuid: ef24529f-fd94-45b7-8d4e-7b915a378633
+    id: image_scale
+    weight: 1
+    data:
+      width: 600
+      height: null
+      upscale: false

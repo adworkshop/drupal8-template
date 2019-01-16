@@ -1,0 +1,26 @@
+uuid: 4acb4a55-7138-4953-9a8b-cba1a52b7a37
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: dJ0L2DNSj5q6XVZAGsuVDpJTh5UeYkIPwKrUOOpr8YI
+id: authenticated
+label: 'Authenticated user'
+weight: 1
+is_admin: false
+permissions:
+  - 'access comments'
+  - 'access content'
+  - 'access shortcuts'
+  - 'access site-wide contact form'
+  - 'access sitemap'
+  - 'post comments'
+  - 'search content'
+  - 'skip comment approval'
+  - 'use text format basic_html'
+  - 'use text format homepage_bottom_slider'
+  - 'use text format homepage_splash_title'
+  - 'view paragraph content format'
+  - 'view paragraph content homepage_block'
+  - 'view paragraph content listings'
+  - 'view paragraph content partners'

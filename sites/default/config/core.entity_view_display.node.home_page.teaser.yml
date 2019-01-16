@@ -1,0 +1,28 @@
+uuid: 59c6cead-0b5f-4b6c-9b23-6582661719a2
+langcode: en
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.home_page.field_meta
+    - field.field.node.home_page.field_spla
+    - field.field.node.home_page.field_splash_image
+    - field.field.node.home_page.field_splash_link
+    - field.field.node.home_page.field_splash_text
+    - node.type.home_page
+  module:
+    - user
+id: node.home_page.teaser
+targetEntityType: node
+bundle: home_page
+mode: teaser
+content:
+  links:
+    weight: 100
+    region: content
+hidden:
+  field_meta: true
+  field_spla: true
+  field_splash_image: true
+  field_splash_link: true
+  field_splash_text: true

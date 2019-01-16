@@ -1,0 +1,25 @@
+uuid: 4be2b2aa-9ea0-4032-bf5c-6c84b995070e
+langcode: en
+status: true
+dependencies:
+  content:
+    - 'block_content:footer_contact_block:6659ebf4-e774-4e78-b16c-6902cca80cdc'
+  module:
+    - block_content
+  theme:
+    - template_site
+id: template_site_footercontactblock
+theme: template_site
+region: footer
+weight: -6
+provider: null
+plugin: 'block_content:6659ebf4-e774-4e78-b16c-6902cca80cdc'
+settings:
+  id: 'block_content:6659ebf4-e774-4e78-b16c-6902cca80cdc'
+  label: 'Footer Contact Block'
+  provider: block_content
+  label_display: '0'
+  status: true
+  info: ''
+  view_mode: full
+visibility: {  }

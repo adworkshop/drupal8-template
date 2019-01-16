@@ -1,0 +1,30 @@
+uuid: 02f4f84a-f8b4-4718-89b8-ba8fc686c5a9
+langcode: en
+status: true
+dependencies:
+  module:
+    - node
+    - webform
+  theme:
+    - template_site
+id: template_site_webform
+theme: template_site
+region: sidebar
+weight: 0
+provider: null
+plugin: webform_block
+settings:
+  id: webform_block
+  label: Webform
+  provider: webform
+  label_display: '0'
+  webform_id: newsletter
+  default_data: ''
+visibility:
+  node_type:
+    id: node_type
+    bundles:
+      page: page
+    negate: false
+    context_mapping:
+      node: '@node.node_route_context:node'

@@ -1,0 +1,19 @@
+uuid: d2fbacad-710f-433f-84c2-75d4bb274881
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_subtitle
+    - paragraphs.paragraphs_type.listings
+id: paragraph.listings.field_subtitle
+field_name: field_subtitle
+entity_type: paragraph
+bundle: listings
+label: Subtitle
+description: 'Optionally add a subtitle for this listing to be shown right under the listing''s title.'
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

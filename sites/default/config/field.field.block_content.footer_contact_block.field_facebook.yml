@@ -1,0 +1,19 @@
+uuid: ab2bd89a-0c42-417e-8889-1d0d3f6fcd79
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.footer_contact_block
+    - field.storage.block_content.field_facebook
+id: block_content.footer_contact_block.field_facebook
+field_name: field_facebook
+entity_type: block_content
+bundle: footer_contact_block
+label: 'Facebook Link'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

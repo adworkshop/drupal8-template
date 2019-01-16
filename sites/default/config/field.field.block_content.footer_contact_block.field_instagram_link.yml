@@ -1,0 +1,19 @@
+uuid: 5b52bdc0-1f61-4324-9268-1827eda15261
+langcode: en
+status: true
+dependencies:
+  config:
+    - block_content.type.footer_contact_block
+    - field.storage.block_content.field_instagram_link
+id: block_content.footer_contact_block.field_instagram_link
+field_name: field_instagram_link
+entity_type: block_content
+bundle: footer_contact_block
+label: 'Instagram Link'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

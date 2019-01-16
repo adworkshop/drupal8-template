@@ -1,0 +1,31 @@
+uuid: f7738e86-1cc1-41f1-80e0-8ddcc022c9ff
+langcode: en
+status: false
+dependencies:
+  config:
+    - filter.format.homepage_splash_title
+  module:
+    - ckeditor
+format: homepage_splash_title
+editor: ckeditor
+settings:
+  toolbar:
+    rows:
+      -
+        -
+          name: Styles
+          items:
+            - Styles
+  plugins:
+    language:
+      language_list: un
+    stylescombo:
+      styles: "h4.splash__title--top|Splash Title Top\r\nh2.splash__title--bottom|Splash Title Bottom"
+image_upload:
+  status: false
+  scheme: public
+  directory: inline-images
+  max_size: ''
+  max_dimensions:
+    width: null
+    height: null

@@ -1,0 +1,8 @@
+uuid: c14ce14c-5832-4adc-8751-8bd78e94864e
+langcode: en
+status: false
+dependencies: {  }
+name: 'Homepage Bottom Slider'
+format: homepage_bottom_slider
+weight: 0
+filters: {  }

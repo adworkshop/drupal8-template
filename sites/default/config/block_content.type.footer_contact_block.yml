@@ -1,0 +1,8 @@
+uuid: b574c9a1-86ae-4413-8da3-17d76fbcdb6d
+langcode: en
+status: true
+dependencies: {  }
+id: footer_contact_block
+label: 'Footer Contact Block'
+revision: 0
+description: 'Change the information shown in the footer contact block.'

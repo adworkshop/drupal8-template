@@ -1,0 +1,36 @@
+uuid: 80e3459d-ea0c-4c3b-a2a9-b3d242b19458
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_featured_
+    - node.type.home_page
+    - paragraphs.paragraphs_type.listings
+  module:
+    - entity_reference_revisions
+id: node.home_page.field_featured_
+field_name: field_featured_
+entity_type: node
+bundle: home_page
+label: 'Featured Listing'
+description: 'Add a listing to be displayed prominently in the homepage listing block.'
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      listings: listings
+    target_bundles_drag_drop:
+      homepage_block:
+        weight: 4
+        enabled: false
+      listings:
+        enabled: true
+        weight: 5
+      partners:
+        weight: 6
+        enabled: false
+field_type: entity_reference_revisions

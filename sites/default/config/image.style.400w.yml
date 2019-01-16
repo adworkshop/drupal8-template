@@ -1,0 +1,15 @@
+uuid: 748715c8-6b8c-4074-b7a0-d4fcfe4d2351
+langcode: en
+status: true
+dependencies: {  }
+name: 400w
+label: 400w
+effects:
+  bdde557d-07a7-43e1-a043-26f2df0b2293:
+    uuid: bdde557d-07a7-43e1-a043-26f2df0b2293
+    id: image_scale
+    weight: 1
+    data:
+      width: 400
+      height: null
+      upscale: false

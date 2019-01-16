@@ -1,0 +1,27 @@
+uuid: 2f1eac86-8c73-4606-841d-2aed12ac656e
+langcode: en
+status: true
+dependencies:
+  config:
+    - system.menu.footer-quicklinks
+  module:
+    - menu_block
+  theme:
+    - template_site
+id: footerquicklinks
+theme: template_site
+region: no_show
+weight: -7
+provider: null
+plugin: 'menu_block:footer-quicklinks'
+settings:
+  id: 'menu_block:footer-quicklinks'
+  label: 'Footer Quicklinks'
+  provider: menu_block
+  label_display: '0'
+  level: 1
+  depth: 1
+  expand: 0
+  parent: 'footer-quicklinks:'
+  suggestion: footer_quicklinks
+visibility: {  }

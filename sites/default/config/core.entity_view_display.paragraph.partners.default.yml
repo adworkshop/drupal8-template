@@ -1,0 +1,34 @@
+uuid: a28b16c0-fda7-4ede-83d6-44ae0f82ae0c
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.paragraph.partners.field_image
+    - field.field.paragraph.partners.field_link
+    - paragraphs.paragraphs_type.partners
+  module:
+    - image
+id: paragraph.partners.default
+targetEntityType: paragraph
+bundle: partners
+mode: default
+content:
+  field_image:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: ''
+    third_party_settings: {  }
+    type: image_url
+    region: content
+  field_link:
+    weight: 1
+    label: hidden
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+hidden:
+  created: true
+  uid: true

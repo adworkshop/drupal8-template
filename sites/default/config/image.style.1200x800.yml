@@ -1,0 +1,14 @@
+uuid: 5d596432-a338-403a-ac1d-ebf5d10c606d
+langcode: en
+status: true
+dependencies: {  }
+name: 1200x800
+label: 1200x800
+effects:
+  4b8f854c-da12-4f81-8a7c-ad8eeed093da:
+    uuid: 4b8f854c-da12-4f81-8a7c-ad8eeed093da
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 1200
+      height: 800

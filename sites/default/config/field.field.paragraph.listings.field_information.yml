@@ -1,0 +1,39 @@
+uuid: 87561756-2367-4e58-8e75-8657e13c7b4a
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_information
+    - paragraphs.paragraphs_type.format
+    - paragraphs.paragraphs_type.listings
+  module:
+    - entity_reference_revisions
+id: paragraph.listings.field_information
+field_name: field_information
+entity_type: paragraph
+bundle: listings
+label: 'Formatted Info'
+description: "Use this field to output information about the listing.<br/>\r\nYou can use this for things like outputting prices."
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    target_bundles:
+      format: format
+    target_bundles_drag_drop:
+      format:
+        enabled: true
+        weight: 5
+      homepage_block:
+        weight: 6
+        enabled: false
+      listings:
+        weight: 7
+        enabled: false
+      partners:
+        weight: 8
+        enabled: false
+field_type: entity_reference_revisions
