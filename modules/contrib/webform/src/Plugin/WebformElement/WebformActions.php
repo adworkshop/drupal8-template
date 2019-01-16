@@ -12,9 +12,10 @@ use Drupal\webform\WebformSubmissionInterface;
  *
  * @WebformElement(
  *   id = "webform_actions",
+ *   default_key = "actions",
  *   label = @Translation("Submit button(s)"),
  *   description = @Translation("Provides an element that contains a Webform's submit, draft, wizard, and/or preview buttons."),
- *   category = @Translation("Actions"),
+ *   category = @Translation("Buttons"),
  * )
  */
 class WebformActions extends ContainerBase {
@@ -28,9 +29,7 @@ class WebformActions extends ContainerBase {
       'title' => '',
       // Attributes.
       'attributes' => [],
-      // Conditional logic.
-      'states' => [],
-    ];
+    ] + $this->getDefaultBaseProperties();
     foreach (WebformActionsElement::$buttons as $button) {
       $properties[$button . '_hide'] = FALSE;
       $properties[$button . '__label'] = '';
@@ -57,13 +56,27 @@ class WebformActions extends ContainerBase {
    * {@inheritdoc}
    */
   public function isRoot() {
-    return TRUE;
+    return FALSE;
   }
 
   /**
    * {@inheritdoc}
    */
   protected function build($format, array &$element, WebformSubmissionInterface $webform_submission, array $options = []) {
+    return [];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getItemDefaultFormat() {
+    return NULL;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getItemFormats() {
     return [];
   }
 
@@ -79,6 +92,13 @@ class WebformActions extends ContainerBase {
   /**
    * {@inheritdoc}
    */
+  public function preview() {
+    return [];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function form(array $form, FormStateInterface $form_state) {
     $form = parent::form($form, $form_state);
 
@@ -89,7 +109,8 @@ class WebformActions extends ContainerBase {
       '#type' => 'fieldset',
       '#title' => $this->t('Buttons'),
     ];
-    $draft_enabled = ($webform->getSetting('draft') != WebformInterface::DRAFT_ENABLED_NONE);
+    $draft_enabled = ($webform->getSetting('draft') != WebformInterface::DRAFT_NONE);
+    $reset_enabled = $webform->getSetting('form_reset');
     $wizard_enabled = $webform->hasWizardPages();
     $preview_enabled = ($webform->getSetting('preview') != DRUPAL_DISABLED);
 
@@ -98,6 +119,11 @@ class WebformActions extends ContainerBase {
         'title' => $this->t('Submit'),
         'label' => $this->t('submit'),
         'access' => TRUE,
+      ],
+      'reset' => [
+        'title' => $this->t('Reset'),
+        'label' => $this->t('reset'),
+        'access' => $reset_enabled,
       ],
       'draft' => [
         'title' => $this->t('Draft'),
@@ -119,13 +145,13 @@ class WebformActions extends ContainerBase {
       'preview_prev' => [
         'title' => $this->t('Preview previous'),
         'label' => $this->t('preview previous'),
-        'description' => $this->t('The text for the button that will proceed to the preview page.'),
+        'description' => $this->t('The text for the button to go backwards from the preview page.'),
         'access' => $preview_enabled,
       ],
       'preview_next' => [
         'title' => $this->t('Preview next'),
         'label' => $this->t('preview next'),
-        'description' => $this->t('The text for the button to go backwards from the preview page.'),
+        'description' => $this->t('The text for the button that will proceed to the preview page.'),
         'access' => $preview_enabled,
       ],
     ];
@@ -155,11 +181,11 @@ class WebformActions extends ContainerBase {
         '#title' => $this->t('Hide @label button', $t_args),
         '#return_value' => TRUE,
       ];
-      if (strpos($name, '_prev') === FALSE) {
+      if (strpos($name, '_prev') === FALSE && $name !== 'reset') {
         $form[$name . '_settings'][$name . '_hide_message'] = [
           '#type' => 'webform_message',
           '#access' => TRUE,
-          '#message_message' => $this->t('Hiding the %label button can cause unexpected issues, please make sure to include the %label button using another actions element.', $t_args),
+          '#message_message' => $this->t("Hiding the %label button can cause unexpected issues, please make sure to include the %label button using another 'Submit button(s)' element.", $t_args),
           '#message_type' => 'warning',
           '#states' => [
             'visible' => [':input[name="properties[' . $name . '_hide]"]' => ['checked' => TRUE]],
@@ -198,13 +224,19 @@ class WebformActions extends ContainerBase {
   public function buildConfigurationForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildConfigurationForm($form, $form_state);
 
-    /** @var \Drupal\webform\WebformInterface $webform */
-    $webform = $form_state->getFormObject()->getWebform();
+    /** @var \Drupal\webform_ui\Form\WebformUiElementEditForm $form_object */
+    $form_object = $form_state->getFormObject();
 
-    if (!$webform->hasActions()) {
-      $form['element']['title']['#default_value'] = $this->t('Submit button(s)');
-      $this->key = 'acccc';
+    if (!$form_object->getWebform()->hasActions()) {
+      $form['element']['title']['#default_value'] = (string) $this->t('Submit button(s)');
     }
+
+    // Hide element settings for default 'actions' to prevent UX confusion.
+    $key = $form_object->getKey() ?: $form_object->getDefaultKey();
+    if ($key === 'actions') {
+      $form['element']['#access'] = FALSE;
+    }
+
     return $form;
   }
 

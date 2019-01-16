@@ -2,13 +2,14 @@
 
 namespace Drupal\webform\Form;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\webform\WebformEntityStorageInterface;
+use Drupal\webform\WebformInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Provides the webform filter webform.
+ * Provides the webform filter form.
  */
 class WebformEntityFilterForm extends FormBase {
 
@@ -29,13 +30,11 @@ class WebformEntityFilterForm extends FormBase {
   /**
    * Constructs a WebformResultsCustomForm object.
    *
-   * @param \Drupal\webform\WebformSubmissionStorageInterface $webform_storage
-   *   The webform submission storage.
-   * @param \Drupal\webform\WebformRequestInterface $request_handler
-   *   The webform request handler.
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+   *   The entity type manager.
    */
-  public function __construct(WebformEntityStorageInterface $webform_storage) {
-    $this->webformStorage = $webform_storage;
+  public function __construct(EntityTypeManagerInterface $entity_type_manager) {
+    $this->webformStorage = $entity_type_manager->getStorage('webform');
   }
 
   /**
@@ -43,7 +42,7 @@ class WebformEntityFilterForm extends FormBase {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('entity_type.manager')->getStorage('webform')
+      $container->get('entity_type.manager')
     );
   }
 
@@ -60,12 +59,13 @@ class WebformEntityFilterForm extends FormBase {
     ];
     $form['filter']['search'] = [
       '#type' => 'search',
-      '#title' => $this->t('Filter by title, description, or elements'),
+      '#title' => $this->t('Keyword'),
       '#title_display' => 'invisible',
-      '#autocomplete_route_name' => 'entity.webform.autocomplete',
-      '#placeholder' => $this->t('Filter by title, description, or elements'),
-      '#maxlength' => 128,
-      '#size' => 40,
+      '#autocomplete_route_name' => 'entity.webform.autocomplete' . ($state === WebformInterface::STATUS_ARCHIVED ? '.archived' : ''),
+      '#placeholder' => $this->t('Filter by title, description, elements, user name, or role'),
+      // Allow autocomplete to use long webform titles.
+      '#maxlength' => 500,
+      '#size' => 45,
       '#default_value' => $search,
     ];
     $form['filter']['category'] = [

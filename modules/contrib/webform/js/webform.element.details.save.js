@@ -22,6 +22,12 @@
       $('details > summary', context).once('webform-details-summary-save').click(function () {
         var $details = $(this).parent();
 
+
+        // @see https://css-tricks.com/snippets/jquery/make-an-jquery-hasattr/
+        if ($details[0].hasAttribute('data-webform-details-nosave')) {
+          return;
+        }
+
         var name = Drupal.webformDetailsSaveGetName($details);
         if (!name) {
           return;
@@ -62,7 +68,7 @@
    * @param {jQuery} $details
    *   A details element.
    *
-   * @return string
+   * @return {string}
    *   The name used to store the state of details element.
    */
   Drupal.webformDetailsSaveGetName = function ($details) {
@@ -91,12 +97,12 @@
       return '';
     }
 
-    // ISSUE: When Drupal renders a webform  in a modal dialog it appends a unique
-    // identifier to webform ids and details ids. (ie my-form--FeSFISegTUI)
+    // ISSUE: When Drupal renders a webform in a modal dialog it appends a unique
+    // identifier to webform ids and details ids. (i.e. my-form--FeSFISegTUI)
     // WORKAROUND: Remove the unique id that delimited using double dashes.
     formId = formId.replace(/--.+?$/, '').replace(/-/g, '_');
     detailsId = detailsId.replace(/--.+?$/, '').replace(/-/g, '_');
     return 'Drupal.webform.' + formId + '.' + detailsId;
-  }
+  };
 
 })(jQuery, Drupal);

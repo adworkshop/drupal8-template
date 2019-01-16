@@ -46,16 +46,16 @@ trait WebformTermReferenceTrait {
   protected static function getOptionsBreadcrumb(array $element, $language) {
     $element += ['#breadcrumb_delimiter' => ' › '];
 
-    /** @var \Drupal\taxonomy\TermStorageInterface $taxonomy_storage */
-    $taxonomy_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
-    $tree = $taxonomy_storage->loadTree($element['#vocabulary'], 0, NULL, TRUE);
+    /** @var \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository */
+    $entity_repository = \Drupal::service('entity.repository');
+
+    $tree = static::loadTree($element['#vocabulary']);
 
     $options = [];
     $breadcrumb = [];
     foreach ($tree as $item) {
-      if ($item->isTranslatable() && $item->hasTranslation($language)) {
-        $item = $item->getTranslation($language);
-      }
+      // Set the item in the correct language for display.
+      $item = $entity_repository->getTranslationFromContext($item);
       $breadcrumb[$item->depth] = $item->getName();
       $breadcrumb = array_slice($breadcrumb, 0, $item->depth + 1);
       $options[$item->id()] = implode($element['#breadcrumb_delimiter'], $breadcrumb);
@@ -77,18 +77,33 @@ trait WebformTermReferenceTrait {
   protected static function getOptionsTree(array $element, $language) {
     $element += ['#tree_delimiter' => '-'];
 
-    /** @var \Drupal\taxonomy\TermStorageInterface $taxonomy_storage */
-    $taxonomy_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
-    $tree = $taxonomy_storage->loadTree($element['#vocabulary'], 0, NULL, TRUE);
+    /** @var \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository */
+    $entity_repository = \Drupal::service('entity.repository');
+
+    $tree = static::loadTree($element['#vocabulary']);
 
     $options = [];
     foreach ($tree as $item) {
-      if ($item->isTranslatable() && $item->hasTranslation($language)) {
-        $item = $item->getTranslation($language);
-      }
+      // Set the item in the correct language for display.
+      $item = $entity_repository->getTranslationFromContext($item);
       $options[$item->id()] = str_repeat($element['#tree_delimiter'], $item->depth) . $item->getName();
     }
     return $options;
+  }
+
+  /**
+   * Finds all terms in a given vocabulary ID.
+   *
+   * @param string $vid
+   *   Vocabulary ID to retrieve terms for.
+   *
+   * @return object[]|\Drupal\taxonomy\TermInterface[]
+   *   An array of term objects that are the children of the vocabulary $vid.
+   */
+  protected static function loadTree($vid) {
+    /** @var \Drupal\taxonomy\TermStorageInterface $taxonomy_storage */
+    $taxonomy_storage = \Drupal::entityTypeManager()->getStorage('taxonomy_term');
+    return $taxonomy_storage->loadTree($vid, 0, NULL, TRUE);
   }
 
 }

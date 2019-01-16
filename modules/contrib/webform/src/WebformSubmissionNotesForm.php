@@ -5,14 +5,17 @@ namespace Drupal\webform;
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Entity\EntityManagerInterface;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\webform\Form\WebformDialogFormTrait;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Drupal\Component\Datetime\TimeInterface;
+use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 
 /**
  * Controller for webform submission notes.
  */
 class WebformSubmissionNotesForm extends ContentEntityForm {
 
-  use WebformDialogTrait;
+  use WebformDialogFormTrait;
 
   /**
    * Webform request handler.
@@ -26,11 +29,18 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
    *
    * @param \Drupal\Core\Entity\EntityManagerInterface $entity_manager
    *   The entity manager.
+   * @param \Drupal\webform\WebformRequestInterface $webform_request
+   *   The webform request handler.
+   * @param \Drupal\Core\Entity\EntityTypeBundleInfoInterface $entity_type_bundle_info
+   *   The entity type bundle service.
+   * @param \Drupal\Component\Datetime\TimeInterface $time
+   *   The time service.
    */
-  public function __construct(EntityManagerInterface $entity_manager) {
-    parent::__construct($entity_manager);
-    // @todo Update constructor once Webform is only supporting Drupal 8.3.x.
-    $this->requestHandler = \Drupal::service('webform.request');
+  public function __construct(EntityManagerInterface $entity_manager, WebformRequestInterface $webform_request, EntityTypeBundleInfoInterface $entity_type_bundle_info = NULL, TimeInterface $time = NULL) {
+    // Calling the parent constructor.
+    parent::__construct($entity_manager, $entity_type_bundle_info, $time);
+
+    $this->requestHandler = $webform_request;
   }
 
   /**
@@ -38,7 +48,10 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
    */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('entity.manager')
+      $container->get('entity.manager'),
+      $container->get('webform.request'),
+      $container->get('entity_type.bundle.info'),
+      $container->get('datetime.time')
     );
   }
 
@@ -46,20 +59,20 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function form(array $form, FormStateInterface $form_state) {
-    /** @var \Drupal\webform\WebformSubmissionInterface $webform_submission */
-    /** @var \Drupal\Core\Entity\EntityInterface $source_entity */
+    // @var \Drupal\webform\WebformSubmissionInterface $webform_submission.
+    // @var \Drupal\Core\Entity\EntityInterface $source_entity.
     list($webform_submission, $source_entity) = $this->requestHandler->getWebformSubmissionEntities();
 
     $form['navigation'] = [
-      '#theme' => 'webform_submission_navigation',
+      '#type' => 'webform_submission_navigation',
       '#webform_submission' => $webform_submission,
-      '#access' => $this->isModalDialog() ? FALSE : TRUE,
+      '#access' => $this->isDialog() ? FALSE : TRUE,
     ];
     $form['information'] = [
-      '#theme' => 'webform_submission_information',
+      '#type' => 'webform_submission_information',
       '#webform_submission' => $webform_submission,
       '#source_entity' => $source_entity,
-      '#access' => $this->isModalDialog() ? FALSE : TRUE,
+      '#access' => $this->isDialog() ? FALSE : TRUE,
     ];
 
     $form['notes'] = [
@@ -70,10 +83,19 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
     ];
     $form['sticky'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Star/flag the status of this submission.'),
+      '#title' => $this->t('Star/flag the status of this submission'),
+      '#description' => $this->t('If checked, this submissions will be starred when reviewing results.'),
       '#default_value' => $webform_submission->isSticky(),
       '#return_value' => TRUE,
-      '#access' => $this->isModalDialog() ? FALSE : TRUE,
+      '#access' => $this->isDialog() ? FALSE : TRUE,
+    ];
+    $form['locked'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Lock this submission'),
+      '#description' => $this->t('If checked, users will not be able to update this submission.'),
+      '#default_value' => $webform_submission->isLocked(),
+      '#return_value' => TRUE,
+      '#access' => $this->isDialog() ? FALSE : TRUE,
     ];
     $form['uid'] = [
       '#type' => 'entity_autocomplete',
@@ -85,6 +107,7 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
       ],
       '#required' => TRUE,
       '#default_value' => $webform_submission->getOwner(),
+      '#access' => $this->currentUser()->hasPermission('administer users'),
     ];
 
     $form['#attached']['library'][] = 'webform/webform.admin';
@@ -97,7 +120,7 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form = parent::buildForm($form, $form_state);
-    return $this->buildFormDialog($form, $form_state);
+    return $this->buildDialogForm($form, $form_state);
   }
 
   /**
@@ -114,7 +137,7 @@ class WebformSubmissionNotesForm extends ContentEntityForm {
    */
   public function save(array $form, FormStateInterface $form_state) {
     parent::save($form, $form_state);
-    drupal_set_message($this->t('Submission @sid notes saved.', ['@sid' => '#' . $this->entity->id()]));
+    $this->messenger()->addStatus($this->t('Submission @sid notes saved.', ['@sid' => '#' . $this->entity->id()]));
   }
 
   /**

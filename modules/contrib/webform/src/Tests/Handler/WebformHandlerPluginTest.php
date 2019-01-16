@@ -20,7 +20,7 @@ class WebformHandlerPluginTest extends WebformTestBase {
   public static $modules = ['webform', 'webform_test_handler'];
 
   /**
-   * Tests webform element plugin.
+   * Tests webform handler plugin.
    */
   public function testWebformHandler() {
     $webform = Webform::load('contact');
@@ -28,7 +28,7 @@ class WebformHandlerPluginTest extends WebformTestBase {
     // Check initial dependencies.
     $this->assertEqual($webform->getDependencies(), ['module' => ['webform']]);
 
-    /** @var \Drupal\webform\WebformHandlerManagerInterface $handler_manager */
+    /** @var \Drupal\webform\Plugin\WebformHandlerManagerInterface $handler_manager */
     $handler_manager = $this->container->get('plugin.manager.webform.handler');
 
     // Add 'test' handler provided by the webform_test.module.

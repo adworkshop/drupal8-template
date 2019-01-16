@@ -2,14 +2,12 @@
 
 namespace Drupal\webform\Plugin\Field\FieldType;
 
-use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\TypedData\DataDefinition;
-use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\webform\WebformInterface;
 
 /**
@@ -110,72 +108,6 @@ class WebformEntityReferenceItem extends EntityReferenceItem {
   }
 
   /**
-   * Get an entity's webform field name.
-   *
-   * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   A fieldable content entity.
-   *
-   * @return string
-   *   The name of the webform field or an empty string.
-   */
-  public static function getEntityWebformFieldName(EntityInterface $entity = NULL) {
-    if ($entity === NULL || !method_exists($entity, 'hasField')) {
-      return '';
-    }
-
-    if ($entity instanceof ContentEntityInterface) {
-      $fields = $entity->getFieldDefinitions();
-      foreach ($fields as $field_name => $field_definition) {
-        if ($field_definition->getType() == 'webform') {
-          return $field_name;
-        }
-      }
-    }
-    return '';
-  }
-
-  /**
-   * Get an entity's target webform.
-   *
-   * @param \Drupal\Core\Entity\EntityInterface $entity
-   *   A fieldable content entity.
-   *
-   * @return \Drupal\webform\WebformInterface|null
-   *   The entity's target webform or NULL.
-   */
-  public static function getEntityWebformTarget(EntityInterface $entity = NULL) {
-    if ($field_name = static::getEntityWebformFieldName($entity)) {
-      return $entity->$field_name->entity;
-    }
-    else {
-      return NULL;
-    }
-  }
-
-  /**
-   * Get the table names for all webform field instances.
-   *
-   * @todo Figure out a better way to determine webform field table names.
-   *
-   * @return array
-   *   An associative array of webform field table names and webform field names.
-   */
-  public static function getTableNames() {
-    /** @var \Drupal\field\FieldStorageConfigInterface[] $field_storage_configs */
-    $field_storage_configs = FieldStorageConfig::loadMultiple();
-    $tables = [];
-    foreach ($field_storage_configs as $field_storage_config) {
-      if ($field_storage_config->getType() == 'webform') {
-        $webform_field_table = \Drupal::database()->tablePrefix($field_storage_config->getTargetEntityTypeId()) . $field_storage_config->getTargetEntityTypeId();
-        $webform_field_name = $field_storage_config->getName();
-        $tables[$webform_field_table . '__' . $webform_field_name] = $webform_field_name;
-        $tables[$webform_field_table . '_revision__' . $webform_field_name] = $webform_field_name;
-      };
-    }
-    return $tables;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public function storageSettingsForm(array &$form, FormStateInterface $form_state, $has_data) {
@@ -187,6 +119,15 @@ class WebformEntityReferenceItem extends EntityReferenceItem {
    */
   public static function getPreconfiguredOptions() {
     return [];
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getSettableOptions(AccountInterface $account = NULL) {
+    /** @var \Drupal\webform\WebformEntityStorageInterface $webform_storage */
+    $webform_storage = \Drupal::service('entity_type.manager')->getStorage('webform');
+    return $webform_storage->getOptions(FALSE);
   }
 
 }

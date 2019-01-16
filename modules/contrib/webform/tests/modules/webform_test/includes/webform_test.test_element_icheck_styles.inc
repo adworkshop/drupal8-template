@@ -17,6 +17,7 @@ function webform_test_test_element_icheck_styles() {
   $skins = [
     'minimal' => t('Minimal'),
     'flat' => t('Flat'),
+    'line' => t('Line'),
     'square' => t('Square'),
   ];
   $colors = [
@@ -60,7 +61,7 @@ function webform_test_test_element_icheck_styles() {
           'three' => 'Three',
         ],
         '#default_value' => 'one',
-        '#wrapper_attributes' => ['class' => 'container-inline'],
+        '#wrapper_attributes' => ['class' => ['container-inline']],
         '#icheck' => $style,
       ];
       $elements[$skin_name][$name . '_radios'] = [
@@ -116,4 +117,5 @@ function _webform_test_test_element_icheck_options() {
       }
     }
   }
+  return $icheck_options;
 }

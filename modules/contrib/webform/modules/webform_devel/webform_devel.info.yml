@@ -4,11 +4,11 @@ description: 'Provides development tools for the Webform module.'
 package: Webform
 # core: 8.x
 dependencies:
-  - 'drupal:devel'
-  - 'drupal:webform'
+  - 'devel:devel'
+  - 'webform:webform'
 
-# Information added by Drupal.org packaging script on 2017-05-31
-version: '8.x-5.0-beta13'
+# Information added by Drupal.org packaging script on 2019-01-02
+version: '8.x-5.1'
 core: '8.x'
 project: 'webform'
-datestamp: 1496265854
+datestamp: 1546458493
