@@ -31,6 +31,7 @@
 {% macro menu_links(items, attributes, menu_level) %}
   {% import _self as menus %}
 
+  {% set hasSectionNav = false %}
   {% if items %}
 
       {% if menu_level == 0 %}
@@ -43,11 +44,14 @@
                       </div>
                   </div>
 
+                  <nav role="navigation" class="menuContainer">
+                  <ul class="adwMenu">
+                  {# this triggers the closing tags #}
+                  {% set hasSectionNav = true %}
               {% endif %}
           {% endfor %}
 
-          <nav role="navigation" class="menuContainer">
-          <ul class="adwMenu">
+
 
       {% endif %}
 
@@ -90,9 +94,10 @@
     {% if menu_level != 0 %}
         </ul>
     {% else %}
-    </ul>
-
-        </nav>
+        {% if hasSectionNav %}
+            </ul>
+          </nav>
+        {% endif %}
     {% endif %}
 
   {% endif %}
