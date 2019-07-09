@@ -1,10 +1,4 @@
 <?php
-
-<<<<<<< HEAD
-=======
-// @codingStandardsIgnoreFile
-
->>>>>>> pantheon-drops-8/master
 /**
  * @file
  * Local development override configuration feature.
@@ -58,11 +52,6 @@ $config['system.performance']['css']['preprocess'] = FALSE;
 $config['system.performance']['js']['preprocess'] = FALSE;
 
 /**
-<<<<<<< HEAD
- * Disable the render cache (this includes the page cache).
-=======
- * Disable the render cache.
->>>>>>> pantheon-drops-8/master
  *
  * Note: you should test with the render cache enabled, to ensure the correct
  * cacheability metadata is present. However, in the early stages of
@@ -71,13 +60,8 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  * This setting disables the render cache by using the Null cache back-end
  * defined by the development.services.yml file above.
  *
-<<<<<<< HEAD
- * Do not use this setting until after the site is installed.
-=======
- * Only use this setting once the site has been installed.
->>>>>>> pantheon-drops-8/master
  */
-# $settings['cache']['bins']['render'] = 'cache.backend.null';
+$settings['cache']['bins']['render'] = 'cache.backend.null';
 
 /**
  * Disable caching for migrations.
@@ -85,11 +69,9 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  * Uncomment the code below to only store migrations in memory and not in the
  * database. This makes it easier to develop custom migrations.
  */
-# $settings['cache']['bins']['discovery_migration'] = 'cache.backend.memory';
+$settings['cache']['bins']['discovery_migration'] = 'cache.backend.memory';
 
 /**
-<<<<<<< HEAD
-=======
  * Disable Internal Page Cache.
  *
  * Note: you should test with Internal Page Cache enabled, to ensure the correct
@@ -101,17 +83,16 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  *
  * Only use this setting once the site has been installed.
  */
-# $settings['cache']['bins']['page'] = 'cache.backend.null';
+$settings['cache']['bins']['page'] = 'cache.backend.null';
 
 /**
->>>>>>> pantheon-drops-8/master
  * Disable Dynamic Page Cache.
  *
  * Note: you should test with Dynamic Page Cache enabled, to ensure the correct
  * cacheability metadata is present (and hence the expected behavior). However,
  * in the early stages of development, you may want to disable it.
  */
-# $settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
+$settings['cache']['bins']['dynamic_page_cache'] = 'cache.backend.null';
 
 /**
  * Allow test modules and themes to be installed.
@@ -120,11 +101,7 @@ $config['system.performance']['js']['preprocess'] = FALSE;
  * During development it can be useful to install test extensions for debugging
  * purposes.
  */
-<<<<<<< HEAD
 $settings['extension_discovery_scan_tests'] = TRUE;
-=======
-# $settings['extension_discovery_scan_tests'] = TRUE;
->>>>>>> pantheon-drops-8/master
 
 /**
  * Enable access to rebuild.php.
