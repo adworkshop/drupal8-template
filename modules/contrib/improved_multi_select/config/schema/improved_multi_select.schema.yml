@@ -13,6 +13,9 @@ improved_multi_select.settings:
     selectors:
       type: string
       label: 'Replace multi-select with specified selectors'
+    placeholder_text:
+      type: string
+      label: 'Placeholder text for search field'
     filtertype:
       type: string
       label: 'Filter functionality'
@@ -22,6 +25,9 @@ improved_multi_select.settings:
     groupresetfilter:
       type: boolean
       label: 'Reset filter when selecting a group'
+    js_regex:
+      type: boolean
+      label: 'Allows usage of JavaScript regular expression in the filter'
     buttontext_add:
       type: string
       label: 'Add button text'

@@ -30,12 +30,10 @@
 .improvedselect .move_down {
   display: block;
   width: 80%;
-  margin: 0 auto;
   border: 1px solid gray;
   cursor: pointer;
-  margin: 0 0 10px 0;
+  margin: 0 0 10px 10%;
   text-align: center;
-  margin-left: 10%;
   background: white;
   /* This is to make the text in the buttons un-selectable. */
   -moz-user-select: -moz-none;
@@ -67,7 +65,6 @@
   border: 1px solid gray;
   background: white;
   list-style: none;
-  overflow: auto;
 }
 .has_group ul.improvedselect_sel,
 .has_group ul.improvedselect_all {
@@ -121,4 +118,5 @@
   background: #eee;
   padding: 1%;
   min-width: 440px;
+  overflow: hidden;
 }

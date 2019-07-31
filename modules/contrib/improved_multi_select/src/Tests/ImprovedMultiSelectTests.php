@@ -1,18 +1,17 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\improved_multi_select\Tests\ImprovedMultiSelectTests.
- */
-
 namespace Drupal\improved_multi_select\Tests;
 
 use Drupal\simpletest\WebTestBase;
 
 /**
+ * Class ImprovedMultiSelectTests.
+ *
  * Improved Multi Select Tests.
  *
- * @group improved_multi_select
+ * @group Improved Multi Select
+ *
+ * @package Drupal\improved_multi_select\Tests
  */
 class ImprovedMultiSelectTests extends WebTestBase {
 
@@ -21,13 +20,12 @@ class ImprovedMultiSelectTests extends WebTestBase {
    *
    * @var array
    */
-  public static $modules = array('improved_multi_select');
-
+  public static $modules = ['improved_multi_select'];
 
   /**
    * Test improved_multi_select_load_selectors() function.
    */
-  protected function testIMSLoadSelectors() {
+  public function testImsLoadSelectors() {
     $replace_all = FALSE;
     $selectors = [];
     $jquery_selectors = improved_multi_select_load_selectors($replace_all, $selectors);

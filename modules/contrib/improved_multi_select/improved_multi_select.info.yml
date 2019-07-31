@@ -1,15 +1,15 @@
 package: Form Elements
 name: 'Improved Multi Select'
 type: module
-description: 'Improved Multi Select'
-# version: VERSION
+description: 'The Improved Multi Select module improve UX by replacing default multi-select boxes with two panel list and search box.'
 # core: 8.x
 configure: ims.settings
 libraries:
   - improved_multi_select/ims
+php: 7.1.0
 
-# Information added by Drupal.org packaging script on 2016-09-14
-version: '8.x-1.3+6-dev'
+# Information added by Drupal.org packaging script on 2019-07-24
+version: '8.x-1.5'
 core: '8.x'
 project: 'improved_multi_select'
-datestamp: 1473866640
+datestamp: 1563994987

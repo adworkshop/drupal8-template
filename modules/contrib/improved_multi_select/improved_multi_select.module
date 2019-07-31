@@ -5,6 +5,8 @@
  * Replace the default multi-select boxes with two panels list and filter.
  */
 
+use Drupal\Core\Routing\RouteMatchInterface;
+
 /**
  * Implements hook_page_attachments().
  */
@@ -21,12 +23,13 @@ function improved_multi_select_page_attachments(&$attachments) {
   if ($replace_all = $config->get('isall')) {
     $activated = TRUE;
   }
-  // Activated based on the matching path or not empty selectors in the module settings.
+  // Activated based on the matching path or not empty selectors in the module
+  // settings.
   elseif (($context['url'] && \Drupal::service('path.matcher')->matchPath($context['request_path'], $context['url'])) || $context['selectors']) {
     $activated = TRUE;
   }
 
-  // Allow other modules to activate or deactivate our module for specific pages.
+  // Allow other modules to activate/deactivate the module for specific pages.
   \Drupal::moduleHandler()->alter('improved_multi_select_activated', $activated, $context);
   if (!$activated) {
     return;
@@ -35,7 +38,9 @@ function improved_multi_select_page_attachments(&$attachments) {
   $drupal_settings = [
     'selectors'           => improved_multi_select_load_selectors($replace_all, $context['selectors']),
     'filtertype'          => $config->get('filtertype'),
+    'placeholder_text'    => $config->get('placeholder_text'),
     'orderable'           => $config->get('orderable'),
+    'js_regex'            => $config->get('js_regex'),
     'groupresetfilter'    => $config->get('groupresetfilter'),
     'buttontext_add'      => $config->get('buttontext_add'),
     'buttontext_addall'   => $config->get('buttontext_addall'),
@@ -53,18 +58,19 @@ function improved_multi_select_page_attachments(&$attachments) {
 }
 
 /**
- * Return array of jQuery selectors from jQuery selectors or 'replace all' option.
+ * Return array of jQuery selectors depending on module configuration.
  *
- * @param boolean $replace_all
- *   Boolean indicating if all multiselects will be replaced.
+ * @param bool $replace_all
+ *   Boolean indicating if all multi value selects should be replaced.
  * @param array $selectors
  *   Array with jQuery selectors.
  *
  * @return array
  *   Array with jQuery selectors.
  */
-function improved_multi_select_load_selectors($replace_all, $selectors) {
+function improved_multi_select_load_selectors(bool $replace_all, array $selectors) {
   $output = [];
+
   if (!empty($selectors) and !$replace_all) {
     foreach ($selectors as $selector) {
       $output[] = $selector;
@@ -73,5 +79,33 @@ function improved_multi_select_load_selectors($replace_all, $selectors) {
   else {
     $output = ['select[multiple]'];
   }
+
   return $output;
+}
+
+/**
+ * Implements hook_help().
+ *
+ * @inheritdoc
+ */
+function improved_multi_select_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'help.page.improved_multi_select':
+      $text = file_get_contents(dirname(__FILE__) . '/README.txt');
+      if (!\Drupal::moduleHandler()->moduleExists('markdown')) {
+        return '<pre>' . $text . '</pre>';
+      }
+
+      // Use the Markdown filter to render the README.
+      $filter_manager = \Drupal::service('plugin.manager.filter');
+      $settings = \Drupal::configFactory()
+        ->get('markdown.settings')
+        ->getRawData();
+      $config = ['settings' => $settings];
+      $filter = $filter_manager->createInstance('markdown', $config);
+
+      return $filter->process($text, 'en');
+
+  }
+  return NULL;
 }

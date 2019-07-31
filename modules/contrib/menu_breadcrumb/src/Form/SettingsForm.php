@@ -59,7 +59,6 @@ class SettingsForm extends ConfigFormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $config = $this->config('menu_breadcrumb.settings');
-    // Renamed from the now meaningless option "determine_menu":
     $form['determine_menu'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Enable the Menu Breadcrumb module'),
@@ -95,10 +94,17 @@ class SettingsForm extends ConfigFormBase {
       ],
     ];
 
+    $form['stop_on_first_match'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Stop on the first matching'),
+      '#description' => $this->t('End the breadcrumb trail when the first matching found in the menu.'),
+      '#default_value' => $config->get('stop_on_first_match'),
+    ];
+
     $form['append_member_page'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Attach taxonomy member page to breadcrumb'),
-      '#description' => $this->t('This option affects breadcrumb display when the current page is a member of a taxonomy whose term is on a menu with "Taxonomy Attachment" selected, when it "attaches" to the menu-based breadcrumbs of that taxonomy term. In this case that term\'s menu title will show as a link regardless of the "current page" options above. Set this option TRUE to also show the the current ("attached") <i>page</i> title as the final breadcrumb.'),
+      '#description' => $this->t('This option affects breadcrumb display when the current page is a member of a taxonomy whose term is on a menu with "Taxonomy Attachment" selected, when it "attaches" to the menu-based breadcrumbs of that taxonomy term. In this case that term\'s menu title will show as a link regardless of the "current page" options above. Set this option TRUE to also show the current ("attached") <i>page</i> title as the final breadcrumb.'),
       '#default_value' => $config->get('append_member_page'),
     ];
 
@@ -114,12 +120,6 @@ class SettingsForm extends ConfigFormBase {
       ],
     ];
 
-    // Removed option "hide_on_single_item" - makes no sense when the taxonomy
-    // attachment feature is added, especially now that this module reverts to
-    // other breadcrumb builders (e.g., the path-based system breadcrumb) when
-    // it doesn't apply (can be reconsidered if there is a valid use case).
-    // $form['hide_on_single_item'] ...
-    //
     $form['remove_home'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Remove "Home" link'),
@@ -141,10 +141,24 @@ class SettingsForm extends ConfigFormBase {
       '#default_value' => $config->get('home_as_site_name'),
     ];
 
+    $form['exclude_empty_url'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Exclude menu items with empty URLs'),
+      '#description' => $this->t('If TRUE, menu items whose Link fields resolves to an empty string (like in the case "&lt;none&gt;" was used) will not be included in the breadcrumb trail.'),
+      '#default_value' => $config->get('exclude_empty_url'),
+    ];
+
+    $form['derived_active_trail'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Derive MenuActiveTrail from RouteMatch'),
+      '#description' => $this->t('If FALSE, the injected @menu.active_trail service will be used.'),
+      '#default_value' => $config->get('derived_active_trail'),
+    ];
+
     $form['include_exclude'] = [
       '#type' => 'fieldset',
       '#title' => $this->t('Enable / Disable Menus'),
-      '#description' => $this->t('<b>Order of operation:</b> The breadcrumb will be generated from the first match it finds: "Enabled" to look for the current item on the menu, then "Taxonomy Attachment" to look for its taxonomy term. Re-order the list to change the priority of each menu.'),
+      '#description' => $this->t('<b>Order of operation:</b> The breadcrumb will be generated from the first match it finds: "Enabled" to look for the current item on the menu, then "Taxonomy Attachment" to look for its taxonomy term. Re-order the list to change the priority of each menu.<br><b>Language Handling:</b> If set, skip this menu when the defined menu language does not match the current content language: recommended setting when you use a separate menu per language. This has no effect on taxonomy attachment.'),
     ];
     $form['include_exclude']['note_about_navigation'] = [
       '#markup' => '<p class="description">' . $this->t("Note: If none of the selected menus contain an item for a given page, Drupal will look in the 'Navigation' menu by default, even if it is 'disabled' here.") . '</p>',
@@ -157,6 +171,7 @@ class SettingsForm extends ConfigFormBase {
         $this->t('Menu'),
         $this->t('Enabled'),
         $this->t('Taxonomy Attachment'),
+        $this->t('Language Handling'),
         $this->t('Weight'),
       ],
       '#empty' => $this->t('There are no menus yet.'),
@@ -187,6 +202,10 @@ class SettingsForm extends ConfigFormBase {
           '#type' => 'checkbox',
           '#default_value' => $menu_config['taxattach'],
         ],
+        'langhandle' => [
+          '#type' => 'checkbox',
+          '#default_value' => $menu_config['langhandle'],
+        ],
         'weight' => [
           '#type' => 'weight',
           '#default_value' => $menu_config['weight'],
@@ -194,10 +213,6 @@ class SettingsForm extends ConfigFormBase {
         ],
       ];
     }
-    // Removed description of a "Default setting" selection which was never
-    // implemeneted in the current D8 version of Menu Breadcrumb.
-    // TODO perhaps find out if this option would be worth preserving
-    // (applied to default tick boxes for new menus added in the future).
     return parent::buildForm($form, $form_state);
   }
 
@@ -210,12 +225,15 @@ class SettingsForm extends ConfigFormBase {
       ->set('disable_admin_page', (boolean) $form_state->getValue('disable_admin_page'))
       ->set('append_current_page', (boolean) $form_state->getValue('append_current_page'))
       ->set('current_page_as_link', (boolean) $form_state->getValue('current_page_as_link'))
+      ->set('stop_on_first_match', (boolean) $form_state->getValue('stop_on_first_match'))
       ->set('append_member_page', (boolean) $form_state->getValue('append_member_page'))
       ->set('member_page_as_link', (boolean) $form_state->getValue('member_page_as_link'))
       ->set('home_as_site_name', (boolean) $form_state->getValue('home_as_site_name'))
       ->set('remove_home', (boolean) $form_state->getValue('remove_home'))
       ->set('add_home', (boolean) $form_state->getValue('add_home'))
       ->set('menu_breadcrumb_menus', $form_state->getValue('menu_breadcrumb_menus'))
+      ->set('exclude_empty_url', $form_state->getValue('exclude_empty_url'))
+      ->set('derived_active_trail', $form_state->getValue('derived_active_trail'))
       ->save();
 
     parent::submitForm($form, $form_state);
@@ -231,8 +249,8 @@ class SettingsForm extends ConfigFormBase {
   /**
    * Get Sorted Menus.
    *
-   * Returns array of menus with properties (enabled, taxattach, weight, label)
-   * sorted by weight, initializing those properties if necessary.
+   * Returns array of menus with properties (enabled, taxattach, langhandle,
+   * weight, label) sorted by weight, initializing those properties if needed.
    */
   protected function getSortedMenus() {
     $menu_enabled = $this->moduleHandler->moduleExists('menu_ui');
@@ -242,10 +260,13 @@ class SettingsForm extends ConfigFormBase {
     foreach ($menus as $menu_name => &$menu) {
       if (!empty($menu_breadcrumb_menus[$menu_name])) {
         $menu = $menu_breadcrumb_menus[$menu_name] + ['label' => $menu];
-        // Earlier versions of the module wouldn't have this array index set.
-        // TODO Remove this when alpha version is finally off the boards.
+        // Earlier versions of the module might not have these array keys set.
+        // TODO Maybe set these for existing menu definitions in upgrade script?
         if (!isset($menu['taxattach'])) {
           $menu['taxattach'] = 0;
+        }
+        if (!isset($menu['langhandle'])) {
+          $menu['langhandle'] = 0;
         }
       }
       else {
@@ -253,6 +274,7 @@ class SettingsForm extends ConfigFormBase {
           'weight' => 0,
           'enabled' => 0,
           'taxattach' => 0,
+          'langhandle' => 0,
           'label' => $menu,
         ];
       }

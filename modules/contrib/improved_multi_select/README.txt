@@ -1,4 +1,15 @@
--- SUMMARY --
+CONTENTS OF THIS FILE
+---------------------
+
+ * Introduction
+ * Requirements
+ * Installation
+ * Configuration
+ * Maintainers
+
+
+INTRODUCTION
+------------
 
 The Improved Multi Select module replace the default multi-select boxes with two
 panel list and search. The first panel holds the options that are available, and
@@ -20,12 +31,20 @@ especially useful when the user has a large list of items to select from.
 Grouping works with search to enable cross-filtering.
 
 
--- INSTALLATION --
+REQUIREMENTS
+------------
+
+No special requirements for this module.
+
+
+INSTALLATION
+------------
 
 * Install as usual, see http://drupal.org/node/70151 for further information.
 
 
--- CONFIGURATION --
+CONFIGURATION
+-------------
 
 Settings can be configured at admin/config/user-interface/ims
 
@@ -71,7 +90,8 @@ The administration settings for this module can be configured by users with the
 "administer site configuration" permission.
 
 
--- CONTACT --
+MAINTAINERS
+-----------
 
 Current maintainers:
 * Dmitrii Varvashenia (dmitrii) - http://drupal.org/user/411965
