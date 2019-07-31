@@ -1,0 +1,13 @@
+name: 'IMS Options Widget'
+type: module
+description: 'Provides a Select Lists widget which keeps previously selected values on top of the available options.'
+# core: 8.x
+dependencies:
+  - drupal:options
+  - improved_multi_select:improved_multi_select
+
+# Information added by Drupal.org packaging script on 2019-07-24
+version: '8.x-1.5'
+core: '8.x'
+project: 'improved_multi_select'
+datestamp: 1563994987
