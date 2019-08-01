@@ -4,7 +4,7 @@ use Drupal\image\Entity\ImageStyle;
 
 // add class to newsletter signup <form> tag
 function template_site_preprocess_webform(&$variables) {
-    if(method_exists($variables['element']['#webform'],'get') && $variables['element']['#webform']->get('id') == 'newsletter'){
+    if (isset($variables['element']['#webform']) && method_exists($variables['element']['#webform'],'get') && $variables['element']['#webform']->get('id') === 'newsletter') {
         $variables['attributes']['class'][] = 'sidebar_newsletter__form';
     }
 }
@@ -13,8 +13,8 @@ function template_site_preprocess_webform(&$variables) {
  * put template suggestions in for webform fieldsets
  * function hook_theme_suggestions_HOOK_alter
  */
-function template_site_theme_suggestions_fieldset_alter(&$suggestions, $variables){
-    if(isset($variables['element']['#webform_id'])){
+function template_site_theme_suggestions_fieldset_alter(&$suggestions, $variables) {
+    if (isset($variables['element']['#webform_id'])) {
         $suggestions[] = 'fieldset__webform_id__'.$variables['element']['#webform_id'];
     }
 }
@@ -24,8 +24,8 @@ function template_site_theme_suggestions_fieldset_alter(&$suggestions, $variable
  * put template suggestions in for webforms
  * function hook_theme_suggestions_HOOK_alter
  */
-function template_site_theme_suggestions_webform_alter(&$suggestions, $variables){
-    if(method_exists($variables['element']['#webform'],'get')){
+function template_site_theme_suggestions_webform_alter(&$suggestions, $variables) {
+    if (isset($variables['element']['#webform']) && method_exists($variables['element']['#webform'],'get')) {
         $suggestions[] = 'webform__id__'.$variables['element']['#webform']->get('id');
     }
 }
