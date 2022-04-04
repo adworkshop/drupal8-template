@@ -7,6 +7,8 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Url;
+use Drupal\Core\Link;
+use Drupal\Core\DrupalKernel;
 
 define('IMAGE_CAPTCHA_ALLOWED_CHARACTERS', 'aAbBCdEeFfGHhijKLMmNPQRrSTtWXYZ23456789');
 
@@ -47,6 +49,61 @@ function _image_captcha_get_enabled_fonts() {
 }
 
 /**
+ * Helper function to get font(s).
+ *
+ * @return string|array
+ *   URI of file hash or List of font paths.
+ */
+function _image_captcha_get_font_uri($token = NULL) {
+  $fonts = [
+    'BUILTIN' => 'BUILTIN',
+  ];
+  $available_fonts = _image_captcha_get_available_fonts_from_directories();
+  foreach ($available_fonts as $file_token => $font_info) {
+    $fonts[$file_token] = $font_info['uri'];
+  }
+  return ((!empty($token) && !empty($fonts[$token])) ? $fonts[$token] : $fonts);
+}
+
+/**
+ * Helper function to get fonts from the given directories.
+ *
+ * @param array|null $directories
+ *   (Optional) an array of directories
+ *   to recursively search through, if not given, the default
+ *   directories will be used.
+ *
+ * @return array
+ *   Fonts file objects (with fields 'name',
+ *   'basename' and 'filename'), keyed on the sha256 hash of the font
+ *   path (to have an easy token that can be used in an url
+ *   without en/decoding issues).
+ */
+function _image_captcha_get_available_fonts_from_directories($directories = NULL) {
+  // If no fonts directories are given: use the default.
+  if ($directories === NULL) {
+    $request = \Drupal::service('request_stack')->getCurrentRequest();
+    $directories = [
+      drupal_get_path('module', 'image_captcha') . '/fonts',
+      'sites/all/libraries/fonts',
+      DrupalKernel::findSitePath($request) . '/libraries/fonts',
+    ];
+  }
+  // Collect the font information.
+  $fonts = [];
+  foreach ($directories as $directory) {
+    if (\Drupal::service('file_system')->prepareDirectory($directory)) {
+      $files = \Drupal::service('file_system')->scanDirectory($directory, '/\.[tT][tT][fF]$/');
+      foreach ($files as $filename => $font) {
+        $fonts[hash('sha256', $filename)] = (array) $font;
+      }
+    }
+  }
+
+  return $fonts;
+}
+
+/**
  * Helper function for checking if the specified fonts are available.
  *
  * @param array $fonts
@@ -55,7 +112,7 @@ function _image_captcha_get_enabled_fonts() {
  * @return array
  *   List($readable_fonts, $problem_fonts).
  */
-function _image_captcha_check_fonts($fonts) {
+function _image_captcha_check_fonts(array $fonts) {
   $readable_fonts = [];
   $problem_fonts = [];
 
@@ -171,7 +228,7 @@ function _image_captcha_check_setup($check_fonts = TRUE) {
  *   The utf8 string which will be used to split in characters.
  *
  * @return array
- *   Array($width, $heigh).
+ *   [$width, $heigh].
  */
 function _image_captcha_image_size($code) {
   $config = \Drupal::config('image_captcha.settings');
@@ -211,8 +268,8 @@ function image_captcha_captcha($op, $captcha_type = '', $captcha_sid = NULL) {
         // the request for the image itself won't succeed (only ?q=user
         // is permitted for unauthenticated users). We fall back to the
         // Math CAPTCHA in that case.
-        if (defined('MAINTENANCE_MODE') && \Drupal::currentUser()
-            ->isAnonymous()
+        if (\Drupal::state()->get('system.maintenance_mode')
+        && \Drupal::currentUser()->isAnonymous()
         ) {
           return captcha_captcha('generate', 'Math');
         }
@@ -237,7 +294,7 @@ function image_captcha_captcha($op, $captcha_type = '', $captcha_sid = NULL) {
           '#theme' => 'image',
           '#uri' => Url::fromRoute('image_captcha.generator', [
             'session_id' => $captcha_sid,
-            'timestamp' => REQUEST_TIME,
+            'timestamp' => \Drupal::time()->getRequestTime(),
           ])->toString(),
           '#width' => $width,
           '#height' => $height,
@@ -275,4 +332,66 @@ function image_captcha_captcha($op, $captcha_type = '', $captcha_sid = NULL) {
       }
       break;
   }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function image_captcha_theme() {
+  return [
+    'image_captcha_refresh' => [
+      'variables' => ['captcha_refresh_link' => NULL],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_element_info_alter().
+ */
+function image_captcha_element_info_alter(array &$element) {
+  if (isset($element['captcha'])) {
+    $element['captcha']['#process'][] = 'image_captcha_after_build_process';
+  }
+}
+
+/**
+ * Add image refresh button to captcha form element.
+ *
+ * @return array
+ *   The processed element.
+ *
+ * @see captcha_element_info()
+ * @see image_captcha_element_info_alter()
+ */
+function image_captcha_after_build_process($element) {
+  $form_id = $element['#captcha_info']['form_id'];
+  $captcha_point = captcha_get_form_id_setting($form_id);
+
+  $is_image_captcha = FALSE;
+  if (isset($captcha_point->captchaType) && $captcha_point->captchaType == 'image_captcha/Image') {
+    $is_image_captcha = TRUE;
+  }
+  elseif (isset($captcha_point->captchaType) && $captcha_point->captchaType == 'default') {
+    $default_challenge = \Drupal::service('config.manager')
+      ->getConfigFactory()
+      ->get('captcha.settings')
+      ->get('default_challenge');
+    if ($default_challenge == 'image_captcha/Image') {
+      $is_image_captcha = TRUE;
+    }
+  }
+
+  if ($is_image_captcha && isset($element['captcha_widgets']['captcha_image'])) {
+    $uri = Link::fromTextAndUrl(t('Get new captcha!'),
+      new Url('image_captcha.refresh',
+        ['form_id' => $form_id],
+        ['attributes' => ['class' => ['reload-captcha']]]
+      )
+    );
+    $element['captcha_widgets']['captcha_refresh'] = [
+      '#theme' => 'image_captcha_refresh',
+      '#captcha_refresh_link' => $uri,
+    ];
+  }
+  return $element;
 }

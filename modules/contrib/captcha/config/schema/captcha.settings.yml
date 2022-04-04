@@ -5,6 +5,9 @@ captcha.settings:
   type: config_object
   label: 'External Links Settings'
   mapping:
+    enabled_default:
+      type: integer
+      label: 'Add captcha to all forms.'
     default_challenge:
       type: string
       label: 'The default challenge for captcha.'
@@ -20,6 +23,9 @@ captcha.settings:
     add_captcha_description:
       type: boolean
       label: 'Add a description to the CAPTCHA'
+    wrong_captcha_response_message:
+      type: label
+      label: 'The error message when a user has entered an incorrect CAPTCHA answer.'
     default_validation:
       type: integer
       label: 'Default CAPTCHA validation'

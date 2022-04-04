@@ -8,7 +8,7 @@ image_captcha.settings:
 image_captcha.font_preview:
   path: '/admin/config/people/captcha/image_captcha/font_preview/{token}'
   defaults:
-    _controller: '\Drupal\image_captcha\Controller\CaptchaFontPreview::content'
+    _controller: '\Drupal\image_captcha\Controller\CaptchaFontPreviewController::getFont'
   requirements:
     _permission: 'administer CAPTCHA settings'
 
@@ -16,5 +16,12 @@ image_captcha.generator:
   path: '/image-captcha-generate/{session_id}/{timestamp}'
   defaults:
     _controller: '\Drupal\image_captcha\Controller\CaptchaImageGeneratorController::image'
+  requirements:
+    _access: 'TRUE'
+
+image_captcha.refresh:
+  path: '/image-captcha-refresh/{form_id}'
+  defaults:
+    _controller: '\Drupal\image_captcha\Controller\CaptchaImageRefresh::refreshCaptcha'
   requirements:
     _access: 'TRUE'
